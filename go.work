@@ -1,6 +1,7 @@
 go 1.23.6
 
 use (
+	attach-container
 	gin-ext
 	k8s-dashboard
 	karmada-apiserver
