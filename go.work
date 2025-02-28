@@ -1,0 +1,10 @@
+go 1.23.6
+
+use (
+	gin-ext
+	k8s-dashboard
+	karmada-apiserver
+	karmada-proxy
+	karmada-search
+	log-viewer
+)
