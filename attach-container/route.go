@@ -1,7 +1,7 @@
 package main
 
 import (
-	"ginext/common"
+	"gin-ext/common"
 	"github.com/gin-gonic/gin"
 	"github.com/karmada-io/dashboard/pkg/client"
 	"k8s.io/client-go/tools/remotecommand"
