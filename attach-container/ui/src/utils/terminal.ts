@@ -48,9 +48,9 @@ export const containerTerminal = new ContainerTerminal(
     },
     {
         // [NOTE] here you should change the namespace、pod、container
-        namespace: '{namespace_name}',
-        pod: '{pod_name}',
-        container: '{container_name}',
+        namespace: import.meta.env.VITE_NAMESPACE_NAME,
+        pod: import.meta.env.VITE_POD_NAME,
+        container: import.meta.env.VITE_CONTAINER_NAME,
         sessionIdUrl: '/api/v1/misc/sockjs/pod/{{namespace}}/{{pod}}/shell/{{container}}',
     },
 );
