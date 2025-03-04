@@ -11,6 +11,9 @@ importers:
       '@karmada/terminal':
         specifier: ^1.0.4
         version: 1.0.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@types/node':
+        specifier: ^20.12.11
+        version: 20.17.23
 
 packages:
 
@@ -29,6 +32,9 @@ packages:
     resolution: {integrity: sha512-GMblSSFJCZaR3lUjDWpF7sxipzngrfm8uWsF2ut/xeDMZ/SVkVxMDigdfTYM1M3PkZjoMigPE/T0YzNKMH3V/Q==}
     peerDependencies:
       '@xterm/xterm': ^5.0.0
+
+  '@types/node@20.17.23':
+    resolution: {integrity: sha512-8PCGZ1ZJbEZuYNTMqywO+Sj4vSKjSjT6Ua+6RFOYlEvIvKQABPtrNkoVSLSKDb4obYcMhspVKmsw8Cm10NFRUg==}
 
   '@xterm/addon-canvas@0.7.0':
     resolution: {integrity: sha512-LF5LYcfvefJuJ7QotNRdRSPc9YASAVDeoT5uyXS/nZshZXjYplGXRECBGiznwvhNL2I8bq1Lf5MzRwstsYQ2Iw==}
@@ -185,6 +191,9 @@ packages:
     resolution: {integrity: sha512-yjL25MBVp7TPnUJZ3aqMAmsUo0fECm96BYllLac0CbsgYT/JpKIi9Fv7wJmBfBwYGn2xf7b/YRVrCmkhed3Nmw==}
     hasBin: true
 
+  undici-types@6.19.8:
+    resolution: {integrity: sha512-ve2KP6f/JnbPBFyobGHuerC9g1FYGn/F8n1LWTwNxCEzd6IfqTwUQcNXgEtmmQ6DlRrC1hrSrBnCZPokRrDHjw==}
+
   url-parse@1.5.10:
     resolution: {integrity: sha512-WypcfiRhfeUP9vvF0j6rw0J3hrWrw6iZv3+22h6iRMJ/8z1Tj6XfLP4DsUix5MhMPnXpiHDoKyoZ/bdCkwBCiQ==}
 
@@ -236,6 +245,10 @@ snapshots:
       file-saver: 2.0.5
       trzsz: 1.1.5
       zmodem.js: 0.1.10
+
+  '@types/node@20.17.23':
+    dependencies:
+      undici-types: 6.19.8
 
   '@xterm/addon-canvas@0.7.0(@xterm/xterm@5.5.0)':
     dependencies:
@@ -364,6 +377,8 @@ snapshots:
   tiny-inflate@1.0.3: {}
 
   trzsz@1.1.5: {}
+
+  undici-types@6.19.8: {}
 
   url-parse@1.5.10:
     dependencies:
