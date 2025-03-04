@@ -24,3 +24,4 @@
 # env file
 .env
 .idea
+node_modules
