@@ -1,0 +1,5 @@
+{
+	"dependencies": {
+		"@karmada/terminal": "^1.0.4"
+	}
+}
