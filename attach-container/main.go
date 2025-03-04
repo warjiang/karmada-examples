@@ -27,7 +27,9 @@ func main() {
 	r.GET("/ping", func(c *gin.Context) {
 		c.String(http.StatusOK, "pang")
 	})
-	r.GET("/pod/:namespace/:pod/shell/:container", handleExecShell)
+
+	apiV1 := r.Group("/api/v1/misc/sockjs")
+	apiV1.GET("/pod/:namespace/:pod/shell/:container", handleExecShell)
 
 	http.Handle("/", r)
 	http.Handle("/api/sockjs/", CreateAttachHandler("/api/sockjs"))
