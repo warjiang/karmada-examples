@@ -1,5 +1,5 @@
 import './App.css'
-import {containerTerminal} from './utils/terminal.ts';
+import {containerTerminal} from '@/utils/terminal.ts';
 import {useEffect, useRef} from 'react';
 
 function App() {
