@@ -10,6 +10,14 @@ export default defineConfig({
   },
   server: {
     proxy: {
+      '^/log/': {
+        target: 'http://localhost:9000',
+        changeOrigin: true,
+        headers: {
+          // cookie: env.VITE_COOKIES,
+          // Authorization: `Bearer ${env.VITE_TOKEN}`
+        },
+      },
       '^/api/': {
         target: 'http://localhost:9000',
         changeOrigin: true,
