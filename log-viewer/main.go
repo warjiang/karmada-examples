@@ -32,7 +32,7 @@ func main() {
 			"message": "pong",
 		})
 	})
-	r.GET("/log/:namespace/:pod", func(c *gin.Context) {
+	r.GET("/log/:namespace/:pod/:container", func(c *gin.Context) {
 		namespace := c.Param("namespace")
 		podID := c.Param("pod")
 		containerID := c.Param("container")
