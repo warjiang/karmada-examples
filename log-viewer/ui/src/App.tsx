@@ -9,7 +9,7 @@ const addons = [
     fitAddon
 ]
 
-const LineSize = 1;
+const LineSize = 10;
 export default function App() {
     const {instance, ref} = useXTerm({
         // options: {},
