@@ -18,7 +18,7 @@ import (
 	"github.com/karmada-io/dashboard/api/pkg/resource/common"
 	"github.com/karmada-io/dashboard/api/pkg/resource/dataselect"
 	"github.com/karmada-io/dashboard/api/pkg/resource/event"
-	client "k8s.io/client-go/kubernetes"
+	
 )
 
 // GetEventsForPod gets events that are associated with this pod.

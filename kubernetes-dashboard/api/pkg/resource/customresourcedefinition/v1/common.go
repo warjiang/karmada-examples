@@ -19,8 +19,7 @@ import (
 	"github.com/karmada-io/dashboard/api/pkg/resource/customresourcedefinition/types"
 	"github.com/karmada-io/dashboard/api/pkg/resource/dataselect"
 	api "k8s.io/api/core/v1"
-	apiextensions "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1"
-	"k8s.io/apimachinery/pkg/runtime/schema"
+	apiextensions "k8s.io/apiextensions-apiserver/pk
 )
 
 type CustomResourceDefinitionCell apiextensions.CustomResourceDefinition

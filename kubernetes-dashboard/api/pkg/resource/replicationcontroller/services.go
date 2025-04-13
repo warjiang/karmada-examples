@@ -20,8 +20,7 @@ import (
 	"github.com/karmada-io/dashboard/api/pkg/resource/common"
 	"github.com/karmada-io/dashboard/api/pkg/resource/dataselect"
 	"github.com/karmada-io/dashboard/api/pkg/resource/service"
-	metaV1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	client "k8s.io/client-go/kubernetes"
+	metaV1 "k8s.io/apimachinery
 	"k8s.io/dashboard/errors"
 )
 

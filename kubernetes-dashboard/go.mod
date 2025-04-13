@@ -2,7 +2,14 @@ module github.com/karmada-io/dashboard
 
 go 1.23.6
 
-
+replace (
+	k8s.io/dashboard/certificates => ./common/certificates
+	k8s.io/dashboard/client => ./common/client
+	k8s.io/dashboard/csrf => ./common/csrf
+	k8s.io/dashboard/errors => ./common/errors
+	k8s.io/dashboard/helpers => ./common/helpers
+	k8s.io/dashboard/types => ./common/types
+)
 
 require (
 	github.com/distribution/reference v0.6.0
@@ -117,13 +124,4 @@ require (
 	sigs.k8s.io/kustomize/kyaml v0.18.1 // indirect
 	sigs.k8s.io/structured-merge-diff/v4 v4.5.0 // indirect
 	sigs.k8s.io/yaml v1.4.0 // indirect
-)
-
-replace (
-	k8s.io/dashboard/certificates => ./common/certificates
-	k8s.io/dashboard/client => ./common/client
-	k8s.io/dashboard/csrf => ./common/csrf
-	k8s.io/dashboard/errors => ./common/errors
-	k8s.io/dashboard/helpers => ./common/helpers
-	k8s.io/dashboard/types => ./common/types
 )

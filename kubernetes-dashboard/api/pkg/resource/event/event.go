@@ -17,7 +17,7 @@ package event
 import (
 	"strings"
 
-	"github.com/karmada-io/dashboard/api/pkg/resource/common"
+	"github.com/karmada-io/d
 	api "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/types"
 )
