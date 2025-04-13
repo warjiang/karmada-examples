@@ -7,5 +7,6 @@ use (
 	karmada-apiserver
 	karmada-proxy
 	karmada-search
+	kubernetes-dashboard
 	log-viewer
 )
