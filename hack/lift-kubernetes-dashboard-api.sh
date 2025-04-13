@@ -15,7 +15,7 @@ WORK_DIR="${REPO_ROOT}/kubernetes-dashboard"
 rm -rf ${WORK_DIR}
 mkdir -p ${WORK_DIR}
 cd ${WORK_DIR}
-go mod init github.com/karmada-io/dashboard
+go mod init kubernetes-dashboard
 
 mkdir -p api
 cp -R ${REPO_ROOT}/tmp/modules/api/ ./api
