@@ -21,8 +21,7 @@ import (
 
 	"k8s.io/dashboard/errors"
 	"k8s.io/dashboard/types"
-	"kubernetes-dashboard/api/pkg/resource/common"
-	"kubernetes-dashboard/api/pkg/resource/dataselect"
+	"
 )
 
 // ClusterRoleBindingList contains a list of clusterRoleBindings in the cluster.

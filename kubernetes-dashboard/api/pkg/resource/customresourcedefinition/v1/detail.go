@@ -23,9 +23,10 @@ import (
 	"k8s.io/client-go/rest"
 
 	"k8s.io/dashboard/errors"
+	"kubernetes-dashboa
 	"kubernetes-dashboard/api/pkg/resource/common"
 	"kubernetes-dashboard/api/pkg/resource/customresourcedefinition/types"
-	"kubernetes-dashboard/api/pkg/resource/dataselect"
+	"k8s.io/dashboard/errors"
 )
 
 // GetCustomResourceDefinitionDetail returns detailed information about a custom resource definition.

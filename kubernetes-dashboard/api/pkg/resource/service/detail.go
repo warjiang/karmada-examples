@@ -23,7 +23,7 @@ import (
 	"k8s.io/klog/v2"
 
 	"k8s.io/dashboard/errors"
-	"kubernetes-dashboard/api/pkg/resource/endpoint"
+	
 )
 
 // Service is a representation of a service.

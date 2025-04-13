@@ -20,11 +20,10 @@ import (
 	v1 "k8s.io/api/core/v1"
 
 	"k8s.io/dashboard/types"
-	metricapi "kubernetes-dashboard/api/p
 	metricapi "kubernetes-dashboard/api/pkg/integration/metric/api"
 	"kubernetes-dashboard/api/pkg/resource/common"
 	"kubernetes-dashboard/api/pkg/resource/dataselect"
-	"k8s.io/dashboard/types"
+	"kubernetes-dashboard/api/pkg/resource/event"
 )
 
 // getRestartCount return the restart count of given pod (total number of its containers restarts).

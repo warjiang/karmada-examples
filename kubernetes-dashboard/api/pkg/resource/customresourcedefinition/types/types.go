@@ -22,7 +22,7 @@ import (
 	"k8s.io/apiextensions-apiserver/pkg/apis/apiextensions"
 
 	"k8s.io/dashboard/types"
-	
+	"kubernetes-dashboard/api/pkg/resource/common"
 )
 
 // CustomResourceDefinitionList contains a list of Custom Resource Definitions in the cluster.

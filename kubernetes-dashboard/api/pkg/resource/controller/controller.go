@@ -27,9 +27,8 @@ import (
 	client "k8s.io/client-go/kubernetes"
 
 	"k8s.io/dashboard/types"
-	"kubernetes-dashboar
 	"kubernetes-dashboard/api/pkg/resource/common"
-	"k8s.io/dashboard/types"
+	"kubernetes-dashboard/api/pkg/resource/event"
 )
 
 // ResourceOwner is an structure representing resource owner, it may be Replication Controller,

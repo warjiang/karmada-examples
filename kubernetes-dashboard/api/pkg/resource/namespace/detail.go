@@ -25,8 +25,7 @@ import (
 	"k8s.io/dashboard/errors"
 	"k8s.io/dashboard/helpers"
 	"k8s.io/dashboard/types"
-	"kubernetes-dashboard/api/pkg/resource/limitrange"
-	rq "kubernetes-dashboard/api/pkg/resource/resourcequota"
+	"
 )
 
 // NamespaceDetail is a presentation layer view of Kubernetes Namespace resource. This means it is Namespace plus

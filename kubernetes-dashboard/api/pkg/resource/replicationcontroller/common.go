@@ -24,11 +24,10 @@ import (
 	client "k8s.io/client-go/kubernetes"
 
 	"k8s.io/dashboard/types"
-	metricapi "kubernetes-dashboard/api/p
 	metricapi "kubernetes-dashboard/api/pkg/integration/metric/api"
 	"kubernetes-dashboard/api/pkg/resource/common"
 	"kubernetes-dashboard/api/pkg/resource/dataselect"
-	"k8s.io/dashboard/types"
+	"kubernetes-dashboard/api/pkg/resource/event"
 )
 
 // Transforms simple selector map to labels.Selector object that can be used when querying for

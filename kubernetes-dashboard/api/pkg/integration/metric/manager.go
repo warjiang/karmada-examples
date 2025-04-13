@@ -22,10 +22,9 @@ import (
 	"k8s.io/klog/v2"
 
 	"k8s.io/dashboard/client"
-	integrationapi "kubernetes-dashboa
 	integrationapi "kubernetes-dashboard/api/pkg/integration/api"
 	metricapi "kubernetes-dashboard/api/pkg/integration/metric/api"
-	"k8s.io/dashboard/client"
+	"kubernetes-dashboard/api/pkg/integration/metric/sidecar"
 )
 
 // MetricManager is responsible for management of all integrated applications related to metrics.

@@ -20,9 +20,8 @@ import (
 	"k8s.io/klog/v2"
 
 	"k8s.io/dashboard/errors"
-	"kuberne
 	"kubernetes-dashboard/api/pkg/args"
-	"k8s.io/dashboard/errors"
+	metricapi "kubernetes-dashboard/api/pkg/integration/metric/api"
 )
 
 // GenericDataCell describes the interface of the data cell that contains all the necessary methods needed to perform

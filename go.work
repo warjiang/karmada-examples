@@ -9,4 +9,11 @@ use (
 	karmada-search
 	kubernetes-dashboard
 	log-viewer
+	kubernetes-dashboard/common/certificates
+	kubernetes-dashboard/common/client
+	kubernetes-dashboard/common/csrf
+	kubernetes-dashboard/common/errors
+	kubernetes-dashboard/common/helpers
+	kubernetes-dashboard/common/types
+
 )

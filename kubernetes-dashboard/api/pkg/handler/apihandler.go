@@ -27,7 +27,7 @@ import (
 	"k8s.io/dashboard/client"
 	"k8s.io/dashboard/csrf"
 	"k8s.io/dashboard/errors"
-
+	"kubernetes-dashboard/api/pkg/resource/networkpolicy"
 
 	"github.com/emicklei/go-restful/v3"
 	"golang.org/x/net/xsrftoken"
