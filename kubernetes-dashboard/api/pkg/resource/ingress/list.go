@@ -20,10 +20,11 @@ import (
 	v1 "k8s.io/api/networking/v1"
 	client "k8s.io/client-go/kubernetes"
 
+	"kubernetes-dashboard/api/pkg/resource/common"
+	"kubernetes-dashboard/api/pkg/resource/dataselect"
 	"k8s.io/dashboard/errors"
 	"k8s.io/dashboard/helpers"
 	"k8s.io/dashboard/types"
-	"
 )
 
 // Ingress - a single ingress returned to the frontend.

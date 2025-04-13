@@ -21,9 +21,9 @@ import (
 	apimachinery "k8s.io/apimachinery/pkg/types"
 	"k8s.io/klog/v2"
 
+	metricapi "kubernetes-dashboard/api/pkg/integration/metric/api"
 	"k8s.io/dashboard/helpers"
 	"k8s.io/dashboard/types"
-	metricapi "kubernetes-dashboard/api/pkg/integration/metric/api"
 )
 
 type sidecarSelector struct {

@@ -23,8 +23,8 @@ import (
 	client "k8s.io/client-go/kubernetes"
 	"k8s.io/klog/v2"
 
-	"k8s.io/dashboard/errors"
 	"kubernetes-dashboard/api/pkg/resource/common"
+	"k8s.io/dashboard/errors"
 )
 
 // RollingUpdateStrategy is behavior of a rolling update. See RollingUpdateDeployment K8s object.

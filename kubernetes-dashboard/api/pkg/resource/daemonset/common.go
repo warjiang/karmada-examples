@@ -24,11 +24,11 @@ import (
 	"k8s.io/apimachinery/pkg/labels"
 	client "k8s.io/client-go/kubernetes"
 
-	"k8s.io/dashboard/types"
 	metricapi "kubernetes-dashboard/api/pkg/integration/metric/api"
 	"kubernetes-dashboard/api/pkg/resource/common"
 	"kubernetes-dashboard/api/pkg/resource/dataselect"
 	"kubernetes-dashboard/api/pkg/resource/event"
+	"k8s.io/dashboard/types"
 )
 
 // GetServicesForDSDeletion is based on given selector returns list of services that are candidates for deletion.

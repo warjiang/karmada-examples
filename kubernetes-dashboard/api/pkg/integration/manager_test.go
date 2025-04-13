@@ -18,9 +18,8 @@ import (
 	"strings"
 	"testing"
 
-	"k8s.io/dashboard/errors"
-	"kubernetes-das
 	"kubernetes-dashboard/api/pkg/integration"
+	"kubernetes-dashboard/api/pkg/integration/api"
 	"k8s.io/dashboard/errors"
 )
 

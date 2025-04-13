@@ -22,10 +22,11 @@ import (
 	k8sClient "k8s.io/client-go/kubernetes"
 	"k8s.io/klog/v2"
 
+	"kubernetes-dashboard/api/pkg/resource/limitrange"
+	rq "kubernetes-dashboard/api/pkg/resource/resourcequota"
 	"k8s.io/dashboard/errors"
 	"k8s.io/dashboard/helpers"
 	"k8s.io/dashboard/types"
-	"
 )
 
 // NamespaceDetail is a presentation layer view of Kubernetes Namespace resource. This means it is Namespace plus

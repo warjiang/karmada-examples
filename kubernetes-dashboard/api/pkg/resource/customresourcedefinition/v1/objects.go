@@ -24,11 +24,11 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/rest"
 
-	"k8s.io/dashboard/errors"
-	commontypes "k8s.io/dashboard/types"
 	"kubernetes-dashboard/api/pkg/resource/common"
 	"kubernetes-dashboard/api/pkg/resource/customresourcedefinition/types"
 	"kubernetes-dashboard/api/pkg/resource/dataselect"
+	"k8s.io/dashboard/errors"
+	commontypes "k8s.io/dashboard/types"
 )
 
 // GetCustomResourceObjectList gets objects for a CR.

@@ -20,8 +20,8 @@ import (
 
 	apimachinery "k8s.io/apimachinery/pkg/types"
 
+	metricapi "kubernetes-dashboard/api/pkg/integration/metric/api"
 	"k8s.io/dashboard/types"
-	
 )
 
 func getMetricPromises(metrics []metricapi.Metric) metricapi.MetricPromises {

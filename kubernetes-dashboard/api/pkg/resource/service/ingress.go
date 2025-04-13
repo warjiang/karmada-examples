@@ -16,10 +16,10 @@ package service
 
 import (
 	client "k8s.io/client-go/kubernetes"
-	"k8s.io/dashboard/errors"
 	"kubernetes-dashboard/api/pkg/resource/common"
 	"kubernetes-dashboard/api/pkg/resource/dataselect"
 	"kubernetes-dashboard/api/pkg/resource/ingress"
+	"k8s.io/dashboard/errors"
 )
 
 func GetServiceIngressList(client client.Interface, dsQuery *dataselect.DataSelectQuery,

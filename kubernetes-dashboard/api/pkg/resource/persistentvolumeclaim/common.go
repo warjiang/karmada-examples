@@ -23,10 +23,9 @@ import (
 	client "k8s.io/client-go/kubernetes"
 	"k8s.io/klog/v2"
 
-	"k8s.io/dashboard/errors"
-	"kuberne
 	"kubernetes-dashboard/api/pkg/args"
 	"kubernetes-dashboard/api/pkg/resource/common"
+	"kubernetes-dashboard/api/pkg/resource/dataselect"
 	"k8s.io/dashboard/errors"
 )
 

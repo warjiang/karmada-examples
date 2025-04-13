@@ -30,9 +30,9 @@ import (
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/rest"
 
-	"k8s.io/dashboard/types"
 	integrationapi "kubernetes-dashboard/api/pkg/integration/api"
 	metricapi "kubernetes-dashboard/api/pkg/integration/metric/api"
+	"k8s.io/dashboard/types"
 )
 
 func areErrorsEqual(err1, err2 error) bool {

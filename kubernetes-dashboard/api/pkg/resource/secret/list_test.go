@@ -21,9 +21,9 @@ import (
 	v1 "k8s.io/api/core/v1"
 	metaV1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
-	"k8s.io/dashboard/types"
 	"kubernetes-dashboard/api/pkg/resource/common"
 	"kubernetes-dashboard/api/pkg/resource/dataselect"
+	"k8s.io/dashboard/types"
 )
 
 func TestToSecretList(t *testing.T) {

@@ -22,11 +22,11 @@ import (
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/klog/v2"
 
+	"kubernetes-dashboard/api/pkg/resource/common"
+	"kubernetes-dashboard/api/pkg/resource/dataselect"
 	"k8s.io/dashboard/errors"
 	"k8s.io/dashboard/helpers"
 	"k8s.io/dashboard/types"
-	"kubernetes-dashboard/api/pkg/resource/common"
-	"kubernetes-dashboard/api/pkg/resource/dataselect"
 )
 
 // SecretSpec is a common interface for the specification of different secrets.

@@ -24,10 +24,10 @@ import (
 	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"
 	"k8s.io/klog/v2"
 
+	"kubernetes-dashboard/api/pkg/resource/networkpolicy"
 	"k8s.io/dashboard/client"
 	"k8s.io/dashboard/csrf"
 	"k8s.io/dashboard/errors"
-	"kubernetes-dashboard/api/pkg/resource/networkpolicy"
 
 	"github.com/emicklei/go-restful/v3"
 	"golang.org/x/net/xsrftoken"

@@ -20,9 +20,8 @@ import (
 	meta "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
 
-	"k8s.io/dashboard/helpers"
-	"kubernetes-dashbo
 	"kubernetes-dashboard/api/pkg/resource/common"
+	"kubernetes-dashboard/api/pkg/resource/controller"
 	"k8s.io/dashboard/helpers"
 )
 

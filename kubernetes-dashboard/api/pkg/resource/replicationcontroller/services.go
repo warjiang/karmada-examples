@@ -19,10 +19,10 @@ import (
 
 	metaV1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	client "k8s.io/client-go/kubernetes"
-	"k8s.io/dashboard/errors"
 	"kubernetes-dashboard/api/pkg/resource/common"
 	"kubernetes-dashboard/api/pkg/resource/dataselect"
 	"kubernetes-dashboard/api/pkg/resource/service"
+	"k8s.io/dashboard/errors"
 )
 
 // GetReplicationControllerServices returns list of services that are related to replication

@@ -22,8 +22,8 @@ import (
 	k8sClient "k8s.io/client-go/kubernetes"
 	"k8s.io/klog/v2"
 
+	"kubernetes-dashboard/api/pkg/resource/endpoint"
 	"k8s.io/dashboard/errors"
-	
 )
 
 // Service is a representation of a service.

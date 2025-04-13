@@ -21,11 +21,11 @@ import (
 	metaV1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	client "k8s.io/client-go/kubernetes"
 
-	"k8s.io/dashboard/errors"
-	"k8s.io/dashboard/types"
 	"kubernetes-dashboard/api/pkg/resource/common"
 	"kubernetes-dashboard/api/pkg/resource/dataselect"
 	"kubernetes-dashboard/api/pkg/resource/replicaset"
+	"k8s.io/dashboard/errors"
+	"k8s.io/dashboard/types"
 )
 
 // GetDeploymentOldReplicaSets returns old replica sets targeting Deployment with given name

@@ -21,10 +21,10 @@ import (
 	"k8s.io/apimachinery/pkg/util/wait"
 	"k8s.io/klog/v2"
 
-	"k8s.io/dashboard/client"
 	integrationapi "kubernetes-dashboard/api/pkg/integration/api"
 	metricapi "kubernetes-dashboard/api/pkg/integration/metric/api"
 	"kubernetes-dashboard/api/pkg/integration/metric/sidecar"
+	"k8s.io/dashboard/client"
 )
 
 // MetricManager is responsible for management of all integrated applications related to metrics.

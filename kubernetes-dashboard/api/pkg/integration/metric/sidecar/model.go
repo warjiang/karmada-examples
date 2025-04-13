@@ -15,8 +15,8 @@
 package sidecar
 
 import (
-	"k8s.io/dashboard/types"
 	metricapi "kubernetes-dashboard/api/pkg/integration/metric/api"
+	"k8s.io/dashboard/types"
 )
 
 // SidecarAllInOneDownloadConfig holds config information specifying whether given native Sidecar

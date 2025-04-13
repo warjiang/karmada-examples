@@ -26,11 +26,11 @@ import (
 	apimachinery "k8s.io/apimachinery/pkg/types"
 	"k8s.io/client-go/kubernetes"
 
+	"kubernetes-dashboard/api/pkg/resource/common"
+	"kubernetes-dashboard/api/pkg/resource/dataselect"
 	"k8s.io/dashboard/errors"
 	"k8s.io/dashboard/helpers"
 	"k8s.io/dashboard/types"
-	"kubernetes-dashboard/api/pkg/resource/common"
-	"kubernetes-dashboard/api/pkg/resource/dataselect"
 )
 
 // EmptyEventList is a empty list of events.

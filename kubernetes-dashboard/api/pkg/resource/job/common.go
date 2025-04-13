@@ -18,10 +18,9 @@ import (
 	batch "k8s.io/api/batch/v1"
 	v1 "k8s.io/api/core/v1"
 
-	"k8s.io/dashboard/types"
-	metricapi "kubernetes-dashboard/api/p
 	metricapi "kubernetes-dashboard/api/pkg/integration/metric/api"
 	"kubernetes-dashboard/api/pkg/resource/common"
+	"kubernetes-dashboard/api/pkg/resource/dataselect"
 	"k8s.io/dashboard/types"
 )
 

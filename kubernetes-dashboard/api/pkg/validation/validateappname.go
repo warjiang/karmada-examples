@@ -21,8 +21,8 @@ import (
 	client "k8s.io/client-go/kubernetes"
 	"k8s.io/klog/v2"
 
+	"kubernetes-dashboard/api/pkg/args"
 	"k8s.io/dashboard/errors"
-	
 )
 
 // AppNameValiditySpec is a specification for application name validation request.

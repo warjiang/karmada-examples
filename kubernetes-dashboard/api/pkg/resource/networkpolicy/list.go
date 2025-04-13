@@ -21,10 +21,11 @@ import (
 
 	client "k8s.io/client-go/kubernetes"
 
+	"kubernetes-dashboard/api/pkg/resource/common"
+	"kubernetes-dashboard/api/pkg/resource/dataselect"
 	"k8s.io/dashboard/errors"
 	"k8s.io/dashboard/helpers"
 	"k8s.io/dashboard/types"
-	"
 )
 
 // NetworkPolicy contains an information about single network policy in the list.

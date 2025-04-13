@@ -20,10 +20,10 @@ import (
 	autoscaling "k8s.io/api/autoscaling/v1"
 	k8sClient "k8s.io/client-go/kubernetes"
 
-	"k8s.io/dashboard/errors"
-	"k8s.io/dashboard/types"
 	"kubernetes-dashboard/api/pkg/resource/common"
 	"kubernetes-dashboard/api/pkg/resource/dataselect"
+	"k8s.io/dashboard/errors"
+	"k8s.io/dashboard/types"
 )
 
 type HorizontalPodAutoscalerList struct {

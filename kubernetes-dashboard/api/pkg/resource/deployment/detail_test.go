@@ -24,9 +24,9 @@ import (
 	"k8s.io/apimachinery/pkg/util/intstr"
 	"k8s.io/client-go/kubernetes/fake"
 
-	"k8s.io/dashboard/types"
 	"kubernetes-dashboard/api/pkg/resource/common"
 	"kubernetes-dashboard/api/pkg/resource/dataselect"
+	"k8s.io/dashboard/types"
 )
 
 func createDeployment(name, namespace, podTemplateName string, replicas int32, podLabel,

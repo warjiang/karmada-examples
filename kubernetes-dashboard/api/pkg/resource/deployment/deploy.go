@@ -36,8 +36,8 @@ import (
 	"k8s.io/client-go/rest"
 	"k8s.io/klog/v2"
 
-	derrors "k8s.io/dashboard/errors"
 	"kubernetes-dashboard/api/pkg/args"
+	derrors "k8s.io/dashboard/errors"
 )
 
 const (

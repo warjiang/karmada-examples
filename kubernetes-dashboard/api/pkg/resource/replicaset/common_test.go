@@ -21,8 +21,8 @@ import (
 	apps "k8s.io/api/apps/v1"
 	metaV1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
-	"k8s.io/dashboard/types"
 	"kubernetes-dashboard/api/pkg/resource/common"
+	"k8s.io/dashboard/types"
 )
 
 func TestToReplicaSet(t *testing.T) {

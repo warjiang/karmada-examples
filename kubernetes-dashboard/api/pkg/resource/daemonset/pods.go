@@ -22,12 +22,12 @@ import (
 	k8sClient "k8s.io/client-go/kubernetes"
 	"k8s.io/klog/v2"
 
-	"k8s.io/dashboard/errors"
 	metricapi "kubernetes-dashboard/api/pkg/integration/metric/api"
 	"kubernetes-dashboard/api/pkg/resource/common"
 	"kubernetes-dashboard/api/pkg/resource/dataselect"
 	"kubernetes-dashboard/api/pkg/resource/event"
 	"kubernetes-dashboard/api/pkg/resource/pod"
+	"k8s.io/dashboard/errors"
 )
 
 // GetDaemonSetPods return list of pods targeting daemon set.
