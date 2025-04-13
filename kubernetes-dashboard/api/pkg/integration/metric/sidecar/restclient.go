@@ -19,7 +19,7 @@ import (
 
 	"k8s.io/client-go/rest"
 
-	"github.com/karmada-io/dashboard/api/pkg/args"
+	"kubernetes-dashboard/api/pkg/args"
 )
 
 // SidecarRESTClient is used to make raw requests to sidecar.

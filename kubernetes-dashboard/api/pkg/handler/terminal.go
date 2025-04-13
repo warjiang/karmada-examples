@@ -34,7 +34,7 @@ import (
 	"k8s.io/client-go/tools/remotecommand"
 	"k8s.io/klog/v2"
 
-	"github.com/karmada-io/dashboard/api/pkg/args"
+	"kubernetes-dashboard/api/pkg/args"
 )
 
 const END_OF_TRANSMISSION = "\u0004"

@@ -22,9 +22,9 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes/fake"
 
-	"github.com/karmada-io/dashboard/api/pkg/resource/cronjob"
-	"github.com/karmada-io/dashboard/api/pkg/resource/dataselect"
 	"k8s.io/dashboard/types"
+	"kubernetes-dashboard/api/pkg/resource/cronjob"
+	"kubernetes-dashboard/api/pkg/resource/dataselect"
 )
 
 func TestGetCronJobDetail(t *testing.T) {

@@ -19,11 +19,11 @@ import (
 	apimachinery "k8s.io/apimachinery/pkg/types"
 	"k8s.io/klog/v2"
 
-	"github.com/karmada-io/dashboard/api/pkg/args"
-	metricapi "github.com/karmada-io/dashboard/api/pkg/integration/metric/api"
-	"github.com/karmada-io/dashboard/api/pkg/resource/dataselect"
 	"k8s.io/dashboard/errors"
 	"k8s.io/dashboard/types"
+	"kubernetes-dashboard/api/pkg/args"
+	metricapi "kubernetes-dashboard/api/pkg/integration/metric/api"
+	"kubernetes-dashboard/api/pkg/resource/dataselect"
 )
 
 // MetricsByPod is a metrics map by pod name.

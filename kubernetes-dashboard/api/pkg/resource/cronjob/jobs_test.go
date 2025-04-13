@@ -24,7 +24,7 @@ import (
 	metaV1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes/fake"
 
-	"github.com/karmada-io/dashboard/api/pkg/resource/cronjob"
+	"kubernetes-dashboard/api/pkg/resource/cronjob"
 )
 
 func TestTriggerCronJobWithInvalidName(t *testing.T) {

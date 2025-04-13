@@ -21,10 +21,11 @@ import (
 	apiextensionsclientset "k8s.io/apiextensions-apiserver/pkg/client/clientset/clientset"
 	"k8s.io/client-go/rest"
 
-	"github.com/karmada-io/dashboard/api/pkg/resource/common"
-	"github.com/karmada-io/dashboard/api/pkg/resource/customresourcedefinition/types"
-	crdv1 "github.com/karmada-io/dashboard/api/pkg/resource/customresourcedefinition/v1"
-	"github.com/karmada-io/dashboard/api/pkg/resource/dataselect"
+	"k8s.io/dashboard/errors"
+	"kubernetes-dashboa
+	"kubernetes-dashboard/api/pkg/resource/common"
+	"kubernetes-dashboard/api/pkg/resource/customresourcedefinition/types"
+	crdv1 "kubernetes-dashboard/api/pkg/resource/customresourcedefinition/v1"
 	"k8s.io/dashboard/errors"
 )
 

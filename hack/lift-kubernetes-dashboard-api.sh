@@ -22,7 +22,7 @@ cp -R ${REPO_ROOT}/tmp/modules/api/ ./api
 cp -R ${REPO_ROOT}/tmp/modules/common/ ./common
 rm -rf ./api/go.{mod,sum}
 for file in $(find ${WORK_DIR}/api/* -type f -name "*.go"|| sed 's|//*|/|g' ); do
-  sed -i "" "s|k8s.io/dashboard/api/pkg/|github.com/karmada-io/dashboard/api/pkg/|g" $file
+  sed -i "" "s|k8s.io/dashboard/api/pkg/|kubernetes-dashboard/api/pkg/|g" $file
 done
 
 # add the following lines in go.mod manually

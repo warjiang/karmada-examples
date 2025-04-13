@@ -17,13 +17,14 @@ package deployment
 import (
 	"context"
 
-	metricapi "github.com/karmada-io/dashboard/api/pkg/integration/metric/api"
-	"github.com/karmada-io/dashboard/api/pkg/resource/common"
-	"github.com/karmada-io/dashboard/api/pkg/resource/dataselect"
-	"github.com/karmada-io/dashboard/api/pkg/resource/event"
-	"github.com/karmada-io/dashboard/api/pkg/resource/pod"
-	metaV1 "k8s.io/apimachinery
+	metaV1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	client "k8s.io/client-go/kubernetes"
 	"k8s.io/dashboard/errors"
+	metricapi "kubernetes-dashboard/api/pkg/integration/metric/api"
+	"kubernetes-dashboard/api/pkg/resource/common"
+	"kubernetes-dashboard/api/pkg/resource/dataselect"
+	"kubernetes-dashboard/api/pkg/resource/event"
+	"kubernetes-dashboard/api/pkg/resource/pod"
 )
 
 // GetDeploymentPods returns list of pods targeting deployment.

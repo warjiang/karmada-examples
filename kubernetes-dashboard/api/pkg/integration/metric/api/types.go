@@ -21,8 +21,8 @@ import (
 	v1 "k8s.io/api/core/v1"
 	apimachinery "k8s.io/apimachinery/pkg/types"
 
-	integrationapi "github.com/karmada-io/dashboard/api/pkg/integration/api"
 	"k8s.io/dashboard/types"
+	
 )
 
 // MetricClient is an interface that exposes API used by dashboard to show graphs and sparklines.

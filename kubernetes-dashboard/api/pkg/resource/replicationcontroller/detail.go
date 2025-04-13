@@ -22,9 +22,9 @@ import (
 	k8sClient "k8s.io/client-go/kubernetes"
 	"k8s.io/klog/v2"
 
-	"github.com/karmada-io/dashboard/api/pkg/args"
-	"github.com/karmada-io/dashboard/api/pkg/resource/common"
 	"k8s.io/dashboard/errors"
+	"kubernetes-dashboard/api/pkg/args"
+	"kubernetes-dashboard/api/pkg/resource/common"
 )
 
 // ReplicationControllerDetail represents detailed information about a Replication Controller.

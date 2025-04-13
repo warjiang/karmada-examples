@@ -23,9 +23,9 @@ import (
 	"k8s.io/apiextensions-apiserver/pkg/client/clientset/clientset/fake"
 	metaV1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
-	"github.com/karmada-io/dashboard/api/pkg/resource/customresourcedefinition/types"
-	"github.com/karmada-io/dashboard/api/pkg/resource/dataselect"
 	commontypes "k8s.io/dashboard/types"
+	"kubernetes-dashboard/api/pkg/resource/customresourcedefinition/types"
+	"kubernetes-dashboard/api/pkg/resource/dataselect"
 )
 
 func TestGetCustomResourceDefinition(t *testing.T) {

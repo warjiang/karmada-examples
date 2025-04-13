@@ -18,7 +18,7 @@ import (
 	api "k8s.io/api/core/v1"
 	"k8s.io/klog/v2"
 
-	"github.com/karmada-io/dashboard/api/pkg/args"
+	"kubernetes-dashboard/api/pkg/args"
 )
 
 // ProtocolValiditySpec is a specification of protocol validation request.

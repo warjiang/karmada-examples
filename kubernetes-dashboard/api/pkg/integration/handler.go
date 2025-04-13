@@ -19,7 +19,7 @@ import (
 
 	"github.com/emicklei/go-restful/v3"
 
-	"github.com/karmada-io/dashboard/api/pkg/integration/api"
+	"kubernetes-dashboard/api/pkg/integration/api"
 )
 
 // Handler manages all endpoints related to integrated applications, such as state.

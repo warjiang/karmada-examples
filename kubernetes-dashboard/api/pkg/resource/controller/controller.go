@@ -26,8 +26,9 @@ import (
 	apimachinery "k8s.io/apimachinery/pkg/types"
 	client "k8s.io/client-go/kubernetes"
 
-	"github.com/karmada-io/dashboard/api/pkg/resource/common"
-	"github.com/karmada-io/dashboard/api/pkg/resource/event"
+	"k8s.io/dashboard/types"
+	"kubernetes-dashboar
+	"kubernetes-dashboard/api/pkg/resource/common"
 	"k8s.io/dashboard/types"
 )
 

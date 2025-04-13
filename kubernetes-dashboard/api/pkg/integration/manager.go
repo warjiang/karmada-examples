@@ -19,8 +19,8 @@ import (
 
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
-	"github.com/karmada-io/dashboard/api/pkg/integration/api"
-	"github.com/karmada-io/dashboard/api/pkg/integration/metric"
+	"kubernetes-dashboard/api/pkg/integration/api"
+	"kubernetes-dashboard/api/pkg/integration/metric"
 )
 
 // Manager is responsible for management of all integrated applications.

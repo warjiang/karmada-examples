@@ -18,11 +18,11 @@ import (
 	client "k8s.io/client-go/kubernetes"
 	"k8s.io/klog/v2"
 
-	"github.com/karmada-io/dashboard/api/pkg/args"
-	"github.com/karmada-io/dashboard/api/pkg/resource/common"
-	"github.com/karmada-io/dashboard/api/pkg/resource/dataselect"
-	"github.com/karmada-io/dashboard/api/pkg/resource/event"
 	"k8s.io/dashboard/types"
+	"kubernetes-dashboard/api/pkg/args"
+	"kubernetes-dashboard/api/pkg/resource/common"
+	"kubernetes-dashboard/api/pkg/resource/dataselect"
+	"kubernetes-dashboard/api/pkg/resource/event"
 )
 
 // GetServiceEvents returns model events for a service with the given name in the given namespace.

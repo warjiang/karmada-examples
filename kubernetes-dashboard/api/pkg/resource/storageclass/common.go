@@ -15,8 +15,8 @@
 package storageclass
 
 import (
-	"github.com/karmada-io/dashboard/api/pkg/resource/dataselect"
-	
+	storage "k8s.io/api/storage/v1"
+	"kubernetes-dashboard/api/pkg/resource/dataselect"
 )
 
 // The code below allows to perform complex data section on []storage.StorageClass

@@ -22,10 +22,10 @@ import (
 	k8sClient "k8s.io/client-go/kubernetes"
 	"k8s.io/klog/v2"
 
-	metricapi "github.com/karmada-io/dashboard/api/pkg/integration/metric/api"
-	"github.com/karmada-io/dashboard/api/pkg/resource/common"
-	hpa "github.com/karmada-io/dashboard/api/pkg/resource/horizontalpodautoscaler"
 	"k8s.io/dashboard/errors"
+	metricapi "kubernetes-dashboard/api/pkg/integration/metric/api"
+	"kubernetes-dashboard/api/pkg/resource/common"
+	hpa "kubernetes-dashboard/api/pkg/resource/horizontalpodautoscaler"
 )
 
 // ReplicaSetDetail is a presentation layer view of Kubernetes Replica Set resource. This means

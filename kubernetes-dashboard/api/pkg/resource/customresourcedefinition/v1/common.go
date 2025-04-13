@@ -15,11 +15,12 @@
 package v1
 
 import (
-	"github.com/karmada-io/dashboard/api/pkg/resource/common"
-	"github.com/karmada-io/dashboard/api/pkg/resource/customresourcedefinition/types"
-	"github.com/karmada-io/dashboard/api/pkg/resource/dataselect"
 	api "k8s.io/api/core/v1"
-	apiextensions "k8s.io/apiextensions-apiserver/pk
+	apiextensions "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1"
+	"k8s.io/apimachinery/pkg/runtime/schema"
+	"kubernetes-dashboard/api/pkg/resource/common"
+	"kubernetes-dashboard/api/pkg/resource/customresourcedefinition/types"
+	"kubernetes-dashboard/api/pkg/resource/dataselect"
 )
 
 type CustomResourceDefinitionCell apiextensions.CustomResourceDefinition

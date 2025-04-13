@@ -15,8 +15,8 @@
 package sidecar
 
 import (
-	metricapi "github.com/karmada-io/dashboard/api/pkg/integration/metric/api"
 	"k8s.io/dashboard/types"
+	metricapi "kubernetes-dashboard/api/pkg/integration/metric/api"
 )
 
 // compress compresses list of SidecarSelectors to equivalent, shorter one in order to perform smaller number of requests.

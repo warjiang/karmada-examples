@@ -17,16 +17,16 @@ package service
 import (
 	"context"
 
-	metricapi "github.com/karmada-io/dashboard/api/pkg/integration/metric/api"
-	"github.com/karmada-io/dashboard/api/pkg/resource/common"
-	"github.com/karmada-io/dashboard/api/pkg/resource/dataselect"
-	"github.com/karmada-io/dashboard/api/pkg/resource/event"
-	"github.com/karmada-io/dashboard/api/pkg/resource/pod"
 	metaV1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/fields"
 	"k8s.io/apimachinery/pkg/labels"
 	k8sClient "k8s.io/client-go/kubernetes"
 	"k8s.io/dashboard/errors"
+	metricapi "kubernetes-dashboard/api/pkg/integration/metric/api"
+	"kubernetes-dashboard/api/pkg/resource/common"
+	"kubernetes-dashboard/api/pkg/resource/dataselect"
+	"kubernetes-dashboard/api/pkg/resource/event"
+	"kubernetes-dashboard/api/pkg/resource/pod"
 )
 
 // GetServicePods gets list of pods targeted by given label selector in given namespace.

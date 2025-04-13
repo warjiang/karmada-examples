@@ -1,4 +1,4 @@
-module karmada-io/dashboard
+module github.com/karmada-io/dashboard
 
 go 1.23.6
 

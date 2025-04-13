@@ -21,8 +21,8 @@ import (
 	metaV1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	k8sClient "k8s.io/client-go/kubernetes"
 
-	"github.com/karmada-io/dashboard/api/pkg/resource/common"
 	"k8s.io/dashboard/errors"
+	"kubernetes-dashboard/api/pkg/resource/common"
 )
 
 // JobDetail is a presentation layer view of Kubernetes Job resource.

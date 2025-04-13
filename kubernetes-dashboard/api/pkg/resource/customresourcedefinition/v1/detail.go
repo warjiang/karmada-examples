@@ -22,10 +22,10 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/rest"
 
-	"github.com/karmada-io/dashboard/api/pkg/resource/common"
-	"github.com/karmada-io/dashboard/api/pkg/resource/customresourcedefinition/types"
-	"github.com/karmada-io/dashboard/api/pkg/resource/dataselect"
 	"k8s.io/dashboard/errors"
+	"kubernetes-dashboard/api/pkg/resource/common"
+	"kubernetes-dashboard/api/pkg/resource/customresourcedefinition/types"
+	"kubernetes-dashboard/api/pkg/resource/dataselect"
 )
 
 // GetCustomResourceDefinitionDetail returns detailed information about a custom resource definition.

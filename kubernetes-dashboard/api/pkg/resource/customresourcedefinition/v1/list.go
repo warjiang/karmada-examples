@@ -19,11 +19,11 @@ import (
 	apiextensionsv1 "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1"
 	apiextensionsclientset "k8s.io/apiextensions-apiserver/pkg/client/clientset/clientset"
 
-	"github.com/karmada-io/dashboard/api/pkg/resource/common"
-	"github.com/karmada-io/dashboard/api/pkg/resource/customresourcedefinition/types"
-	"github.com/karmada-io/dashboard/api/pkg/resource/dataselect"
 	"k8s.io/dashboard/errors"
 	commontypes "k8s.io/dashboard/types"
+	"kubernetes-dashboard/api/pkg/resource/common"
+	"kubernetes-dashboard/api/pkg/resource/customresourcedefinition/types"
+	"kubernetes-dashboard/api/pkg/resource/dataselect"
 )
 
 // GetCustomResourceDefinitionList returns all the custom resource definitions in the cluster.

@@ -22,8 +22,9 @@ import (
 	k8sClient "k8s.io/client-go/kubernetes"
 	"k8s.io/klog/v2"
 
-	"github.com/karmada-io/dashboard/api/pkg/args"
-	"github.com/karmada-io/dashboard/api/pkg/resource/common"
+	"k8s.io/dashboard/types"
+	"kubernet
+	"kubernetes-dashboard/api/pkg/args"
 	"k8s.io/dashboard/types"
 )
 

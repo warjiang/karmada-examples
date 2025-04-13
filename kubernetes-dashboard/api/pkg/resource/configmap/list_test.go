@@ -21,8 +21,8 @@ import (
 	v1 "k8s.io/api/core/v1"
 	metaV1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
-	"github.com/karmada-io/dashboard/api/pkg/resource/dataselect"
 	"k8s.io/dashboard/types"
+	"kubernetes-dashboard/api/pkg/resource/dataselect"
 )
 
 func TestToConfigMapList(t *testing.T) {

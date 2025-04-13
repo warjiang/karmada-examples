@@ -25,10 +25,11 @@ import (
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/klog/v2"
 
-	"github.com/karmada-io/dashboard/api/pkg/args"
-	integrationapi "github.com/karmada-io/dashboard/api/pkg/integration/api"
-	metricapi "github.com/karmada-io/dashboard/api/pkg/integration/metric/api"
-	"github.com/karmada-io/dashboard/api/pkg/integration/metric/common"
+	"k8s.io/dashboard/client"
+	"kuberne
+	"kubernetes-dashboard/api/pkg/args"
+	integrationapi "kubernetes-dashboard/api/pkg/integration/api"
+	metricapi "kubernetes-dashboard/api/pkg/integration/metric/api"
 	"k8s.io/dashboard/client"
 )
 

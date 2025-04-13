@@ -15,7 +15,7 @@
 package integration
 
 import (
-	"github.com/karmada-io/dashboard/api/pkg/integration/api"
+	"kubernetes-dashboard/api/pkg/integration/api"
 )
 
 // Getter is responsible for listing all supported integrations.

@@ -15,7 +15,7 @@
 package rolebinding
 
 import (
-	"github.com/karmada-io/dashboard/api/pkg/resource/dataselect"
+	"kubernetes-dashboard/api/pkg/resource/dataselect"
 )
 
 // The code below allows to perform complex data section on []RoleBinding

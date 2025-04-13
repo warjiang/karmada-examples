@@ -19,8 +19,9 @@ import (
 
 	"k8s.io/klog/v2"
 
-	"github.com/karmada-io/dashboard/api/pkg/args"
-	metricapi "github.com/karmada-io/dashboard/api/pkg/integration/metric/api"
+	"k8s.io/dashboard/errors"
+	"kuberne
+	"kubernetes-dashboard/api/pkg/args"
 	"k8s.io/dashboard/errors"
 )
 

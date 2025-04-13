@@ -21,9 +21,10 @@ import (
 	"k8s.io/apimachinery/pkg/util/wait"
 	"k8s.io/klog/v2"
 
-	integrationapi "github.com/karmada-io/dashboard/api/pkg/integration/api"
-	metricapi "github.com/karmada-io/dashboard/api/pkg/integration/metric/api"
-	"github.com/karmada-io/dashboard/api/pkg/integration/metric/sidecar"
+	"k8s.io/dashboard/client"
+	integrationapi "kubernetes-dashboa
+	integrationapi "kubernetes-dashboard/api/pkg/integration/api"
+	metricapi "kubernetes-dashboard/api/pkg/integration/metric/api"
 	"k8s.io/dashboard/client"
 )
 

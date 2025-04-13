@@ -18,9 +18,9 @@ import (
 	"reflect"
 	"testing"
 
-	integrationapi "github.com/karmada-io/dashboard/api/pkg/integration/api"
-	"github.com/karmada-io/dashboard/api/pkg/integration/metric/api"
 	"k8s.io/dashboard/errors"
+	integrationapi "kubernetes-dashboard/api/pkg/integration/api"
+	"kubernetes-dashboard/api/pkg/integration/metric/api"
 )
 
 const fakeMetricClientID integrationapi.IntegrationID = "test-id"

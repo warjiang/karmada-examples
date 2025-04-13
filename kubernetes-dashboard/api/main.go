@@ -26,13 +26,14 @@ import (
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"k8s.io/klog/v2"
 
-	"github.com/karmada-io/dashboard/api/pkg/args"
-	"github.com/karmada-io/dashboard/api/pkg/environment"
-	"github.com/karmada-io/dashboard/api/pkg/handler"
-	"github.com/karmada-io/dashboard/api/pkg/integration"
-	integrationapi "github.com/karmada-io/dashboard/api/pkg/integration/api"
 	"k8s.io/dashboard/certificates"
 	"k8s.io/dashboard/certificates/ecdsa"
+	"k8s.io/dashboard/client"
+	"kubernetes-dashboar
+	"kubernetes-dashboard/api/pkg/args"
+	"kubernetes-dashboard/api/pkg/environment"
+	"kubernetes-dashboard/api/pkg/handler"
+	"kubernetes-dashboard/api/pkg/integration"
 	"k8s.io/dashboard/client"
 )
 

@@ -21,8 +21,8 @@ import (
 	v1 "k8s.io/api/core/v1"
 	metaV1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
-	metricapi "github.com/karmada-io/dashboard/api/pkg/integration/metric/api"
 	"k8s.io/dashboard/types"
+	metricapi "kubernetes-dashboard/api/pkg/integration/metric/api"
 )
 
 func TestGetSidecarSelector(t *testing.T) {
