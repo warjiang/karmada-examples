@@ -7,9 +7,13 @@ on:
     # for PRs initiated by Dependabot.
     branches-ignore:
       - 'dependabot/**'
+    paths:
+      - 'tgbot/**'       # only be triggered for specific folders
   pull_request:
     branches:
       - main
+    paths:
+      - 'tgbot/**'       # only be triggered for specific folders
 jobs:
   build-and-push-image:
     name: build and push image
