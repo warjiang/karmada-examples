@@ -9,6 +9,7 @@ replace (
 	k8s.io/dashboard/errors => ./common/errors
 	k8s.io/dashboard/helpers => ./common/helpers
 	k8s.io/dashboard/types => ./common/types
+	github.com/ugorji/go/codec => github.com/ugorji/go/codec v1.1.4
 )
 
 require (
