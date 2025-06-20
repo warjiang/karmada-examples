@@ -2,6 +2,7 @@ go 1.23.6
 
 use (
 	attach-container
+	eino-examples
 	gin-ext
 	k8s-dashboard
 	karmada-apiserver

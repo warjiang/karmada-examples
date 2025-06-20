@@ -1,0 +1,1 @@
+go get -u -v github.com/cloudwego/eino@latest
