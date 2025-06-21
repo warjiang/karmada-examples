@@ -17,6 +17,8 @@ github.com/cloudwego/eino v0.3.43 h1:mXtfnZjBAQuW8e4OKNX2dYbJxq9UNT9Vynow3NV1CZI
 github.com/cloudwego/eino v0.3.43/go.mod h1:wUjz990apdsaOraOXdh6CdhVXq8DJsOvLsVlxNTcNfY=
 github.com/cloudwego/eino-ext/components/model/openai v0.0.0-20250618074023-43c9d2687195 h1:2zH2i6saO6F/M3UkcPKjDBJd7R4NzyjSWqSUMFtXdD4=
 github.com/cloudwego/eino-ext/components/model/openai v0.0.0-20250618074023-43c9d2687195/go.mod h1:FCcVMVYA6RxamCqJJYRQpYbF6EWIVJ0GZkRnLoiINlI=
+github.com/cloudwego/eino-ext/components/tool/duckduckgo v0.0.0-20250618074023-43c9d2687195 h1:UNk61fQl8j2WXxmhkaM3JnWmryDRS63l577qUNsuBbo=
+github.com/cloudwego/eino-ext/components/tool/duckduckgo v0.0.0-20250618074023-43c9d2687195/go.mod h1:xnIGPuAwPi70GoSPWbipwHMpsfyEdzFd8jc6Up190Rk=
 github.com/cloudwego/eino-ext/libs/acl/openai v0.0.0-20250605072634-0f875e04269d h1:dh7XwH6UAXXH9GQ4NTg4FRmek2tCoQgBGI79vYzwm9g=
 github.com/cloudwego/eino-ext/libs/acl/openai v0.0.0-20250605072634-0f875e04269d/go.mod h1:XKWiwOSkHWN23yd14et8A9khSKSYACU0xu4caySDA5U=
 github.com/cloudwego/iasm v0.2.0/go.mod h1:8rXZaNYT2n95jn+zTI1sDr+IgcD2GVs0nlbbQPiEFhY=
@@ -135,6 +137,8 @@ github.com/x-cray/logrus-prefixed-formatter v0.5.2 h1:00txxvfBM9muc0jiLIEAkAcIMJ
 github.com/x-cray/logrus-prefixed-formatter v0.5.2/go.mod h1:2duySbKsL6M18s5GU7VPsoEPHyzalCE06qoARUCeBBE=
 github.com/yargevad/filepathx v1.0.0 h1:SYcT+N3tYGi+NvazubCNlvgIPbzAk7i7y2dwg3I5FYc=
 github.com/yargevad/filepathx v1.0.0/go.mod h1:BprfX/gpYNJHJfc35GjRRpVcwWXS89gGulUIU5tK3tA=
+go.uber.org/mock v0.4.0 h1:VcM4ZOtdbR4f6VXfiOpwpVJDL6lCReaZ6mw31wqh7KU=
+go.uber.org/mock v0.4.0/go.mod h1:a6FSlNadKUHUa9IP5Vyt1zh4fC7uAwxMutEAscFbkZc=
 golang.org/x/arch v0.11.0 h1:KXV8WWKCXm6tRpLirl2szsO5j/oOODwZf4hATmGVNs4=
 golang.org/x/arch v0.11.0/go.mod h1:FEVrYAQjsQXMVJ1nsMoVVXPZg6p2JE2mx8psSWTDQys=
 golang.org/x/crypto v0.0.0-20180904163835-0709b304e793/go.mod h1:6SG95UA2DQfeDnfUPMdvaQW0Q7yPrPDi9nlGo2tz2b4=

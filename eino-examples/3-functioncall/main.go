@@ -20,11 +20,19 @@ func main() {
 	if err != nil {
 
 	}
+	ctx := context.TODO()
+
 	updateTool, err := utils.InferTool("update_todo", "Update a todo item, eg: content,deadline...", UpdateTodoFunc)
 	if err != nil {
 		logs.Errorf("InferTool failed, err=%v", err)
 		return
 	}
+	//searchTool, err := duckduckgo.NewTool(ctx, &duckduckgo.Config{
+	//	ToolName:   "duckduckgo_search",
+	//	ToolDesc:   "search web for information by duckduckgo",
+	//	Region:     ddgsearch.RegionWT,
+	//	MaxResults: 10,
+	//})
 
 	// 初始化 tools
 	todoTools := []tool.BaseTool{
@@ -34,7 +42,6 @@ func main() {
 		//searchTool,
 	}
 
-	ctx := context.TODO()
 	config := &openai.ChatModelConfig{
 		BaseURL: os.Getenv("BASEURL"),
 		Model:   os.Getenv("MODEL"),

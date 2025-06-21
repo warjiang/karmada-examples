@@ -2,13 +2,17 @@ module eino-examples
 
 go 1.23.6
 
-require github.com/cloudwego/eino-ext/components/model/openai v0.0.0-20250618074023-43c9d2687195
+require (
+	github.com/cloudwego/eino v0.3.43
+	github.com/cloudwego/eino-ext/components/model/openai v0.0.0-20250618074023-43c9d2687195
+	github.com/cloudwego/eino-ext/components/tool/duckduckgo v0.0.0-20250618074023-43c9d2687195
+	github.com/joho/godotenv v1.5.1
+)
 
 require (
 	github.com/bytedance/sonic v1.13.2 // indirect
 	github.com/bytedance/sonic/loader v0.2.4 // indirect
 	github.com/cloudwego/base64x v0.1.5 // indirect
-	github.com/cloudwego/eino v0.3.43 // indirect
 	github.com/cloudwego/eino-ext/libs/acl/openai v0.0.0-20250605072634-0f875e04269d // indirect
 	github.com/dustin/go-humanize v1.0.1 // indirect
 	github.com/evanphx/json-patch v0.5.2 // indirect
@@ -17,7 +21,6 @@ require (
 	github.com/go-openapi/swag v0.19.5 // indirect
 	github.com/goph/emperror v0.17.2 // indirect
 	github.com/invopop/yaml v0.1.0 // indirect
-	github.com/joho/godotenv v1.5.1 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/klauspost/cpuid/v2 v2.0.9 // indirect
