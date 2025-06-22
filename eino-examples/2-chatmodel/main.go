@@ -20,7 +20,8 @@ func main() {
 
 	}
 	ctx := context.TODO()
-	model := initChatModel(ctx, "openai")
+	// model := initChatModel(ctx, "openai")
+	model := initToolChatModel(ctx, "openai")
 
 	/*
 		streamResult, _ := model.Stream(ctx, []*schema.Message{
@@ -63,6 +64,35 @@ func initChatModel(ctx context.Context, modelType string) model.ChatModel {
 		chatModel, _ = ark.NewChatModel(ctx, config)
 	}
 	return chatModel
+}
+
+func initToolChatModel(ctx context.Context, modelType string) model.ToolCallingChatModel {
+	var toolcallChatModel model.ToolCallingChatModel
+	switch modelType {
+	case "ollama":
+		config := &ollama.ChatModelConfig{
+			BaseURL: os.Getenv("OLLAMA_BASE_URL"),
+			Model:   os.Getenv("OLLAMA_MODEL"),
+		}
+		toolcallChatModel, _ = ollama.NewChatModel(ctx, config)
+	case "openai":
+		config := &openai.ChatModelConfig{
+			BaseURL: os.Getenv("OPENAI_BASE_URL"),
+			APIKey:  os.Getenv("OPENAI_API_KEY"),
+			Model:   os.Getenv("OPENAI_MODEL_NAME"),
+		}
+		toolcallChatModel, _ = openai.NewChatModel(ctx, config)
+	case "ark":
+		fallthrough
+	default:
+		config := &ark.ChatModelConfig{
+			BaseURL: os.Getenv("ARK_BASE_URL"),
+			APIKey:  os.Getenv("ARK_API_KEY"),
+			Model:   os.Getenv("ARK_MODEL_NAME"),
+		}
+		toolcallChatModel, _ = ark.NewChatModel(ctx, config)
+	}
+	return toolcallChatModel
 }
 
 func reportStream(sr *schema.StreamReader[*schema.Message]) {
