@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	"github.com/cloudwego/eino-ext/components/embedding/openai"
+	"github.com/cloudwego/eino-ext/components/embedding/ark"
 	"github.com/cloudwego/eino/callbacks"
 	"github.com/cloudwego/eino/components/embedding"
 	"github.com/cloudwego/eino/compose"
@@ -18,19 +18,23 @@ func main() {
 		panic("load dotenv failed")
 	}
 
-	accessKey := os.Getenv("OPENAI_API_KEY")
-
 	ctx := context.Background()
 
-	var (
-		defaultDim = 1024
-	)
-
-	embedder, err := openai.NewEmbedder(ctx, &openai.EmbeddingConfig{
-		APIKey:     accessKey,
-		Model:      "text-embedding-3-large",
-		Dimensions: &defaultDim,
-		Timeout:    0,
+	/*
+		accessKey := os.Getenv("OPENAI_API_KEY")
+		var (
+			defaultDim = 1024
+		)
+		embedder, err := openai.NewEmbedder(ctx, &openai.EmbeddingConfig{
+			APIKey:     accessKey,
+			Model:      "text-embedding-3-large",
+			Dimensions: &defaultDim,
+			Timeout:    0,
+		})
+	*/
+	embedder, err := ark.NewEmbedder(ctx, &ark.EmbeddingConfig{
+		APIKey: os.Getenv("ARK_API_KEY"),
+		Model:  os.Getenv("ARK_MODEL"),
 	})
 	if err != nil {
 		log.Fatalf("NewEmbedder of openai failed, err=%v", err)
