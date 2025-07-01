@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prometheus Metrics</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.3.2/dist/echarts.min.js"></script>
+</head>
+<body>
+    <form id="scrape-form">
+        <label for="namespace">Namespace:</label>
+        <input type="text" id="namespace" name="namespace" value="karmada-system">
+        <label for="pod">Pod:</label>
+        <input type="text" id="pod" name="pod" value="karmada-scheduler-7bd4659f9f-8lfb5">
+        <label for="port">Port:</label>
+        <input type="text" id="port" name="port" value="10351">
+        <button type="submit">Scrape Pod</button>
+    </form>
+    <br>
+    <div id="main" style="width: 100%;height:600px;"></div>
+    <script type="text/javascript">
+        var myChart = echarts.init(document.getElementById('main'));
+
+        // Specify the configuration items and data for the chart
+        var option = {
+            title: {
+                text: 'Metrics'
+            },
+            tooltip: {},
+            legend: {
+                data:[]
+            },
+            xAxis: {
+                data: []
+            },
+            yAxis: {},
+            series: []
+        };
+
+        // Display the chart
+        myChart.setOption(option);
+
+        document.getElementById('scrape-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const namespace = document.getElementById('namespace').value;
+            const pod = document.getElementById('pod').value;
+            const port = document.getElementById('port').value;
+            fetch('/scrape/pod', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    namespace: namespace,
+                    name: pod,
+                    port: port
+                })
+            }).then(() => {
+                fetchMetrics('apiserver_request_total');
+            });
+        });
+
+        function fetchMetrics(name) {
+            fetch('/metrics/' + name)
+                .then(response => response.json())
+                .then(data => {
+                    // group metrics by labels
+                    const groupedMetrics = data.reduce((acc, metric) => {
+                        const key = JSON.stringify(metric.Labels);
+                        if (!acc[key]) {
+                            acc[key] = [];
+                        }
+                        acc[key].push(metric);
+                        return acc;
+                    }, {});
+
+                    const series = [];
+                    const legendData = [];
+                    for (const key in groupedMetrics) {
+                        const metrics = groupedMetrics[key];
+                        const legend = metrics[0].Labels.map(l => `${l.Name}=${l.Value}`).join(',');
+                        legendData.push(legend);
+                        series.push({
+                            name: legend,
+                            type: 'line',
+                            data: metrics.map(m => [m.Timestamp, m.Value])
+                        });
+                    }
+
+                    myChart.setOption({
+                        legend: {
+                            data: legendData
+                        },
+                        xAxis: {
+                            type: 'time'
+                        },
+                        yAxis: {
+                            type: 'value'
+                        },
+                        series: series
+                    });
+                });
+        }
+    </script>
+</body>
+</html>

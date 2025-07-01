@@ -1,14 +1,13 @@
-go 1.24.2
-
-toolchain go1.24.4
+go 1.24.4
 
 use (
-	attach-container
-	eino-examples
-	gin-ext
-	k8s-dashboard
-	karmada-apiserver
-	karmada-proxy
-	karmada-search
-	log-viewer
+	./attach-container
+	./eino-examples
+	./gin-ext
+	./k8s-dashboard
+	./karmada-apiserver
+	./karmada-proxy
+	./karmada-search
+	./log-viewer
+	./prometheus-scraper
 )

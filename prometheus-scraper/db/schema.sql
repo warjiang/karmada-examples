@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS metrics (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    labels TEXT,
+    value REAL NOT NULL,
+    timestamp INTEGER NOT NULL
+);
