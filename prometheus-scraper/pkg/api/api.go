@@ -10,6 +10,7 @@ import (
 
 func RegisterRoutes(r *gin.Engine, db *database.DB) {
 	r.GET("/metrics/:name", getMetrics(db))
+	r.GET("/metrics/names", getMetricNames(db))
 	r.POST("/scrape", scrapeMetrics(db))
 	r.POST("/scrape/pod", scrapePodMetrics(db))
 }
@@ -17,12 +18,29 @@ func RegisterRoutes(r *gin.Engine, db *database.DB) {
 func getMetrics(db *database.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		name := c.Param("name")
-		metrics, err := db.GetMetrics(name)
+		labels := make(map[string]string)
+		for k, v := range c.Request.URL.Query() {
+			if k != "name" {
+				labels[k] = v[0]
+			}
+		}
+		metrics, err := db.GetMetrics(name, labels)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 			return
 		}
 		c.JSON(http.StatusOK, metrics)
+	}
+}
+
+func getMetricNames(db *database.DB) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		names, err := db.GetMetricNames()
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
+		}
+		c.JSON(http.StatusOK, names)
 	}
 }
 
