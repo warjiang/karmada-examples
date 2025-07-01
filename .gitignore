@@ -26,3 +26,5 @@
 .idea
 node_modules
 **/.venv
+journal_*
+volumes

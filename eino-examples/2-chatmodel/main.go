@@ -3,7 +3,10 @@ package main
 import (
 	"context"
 	"fmt"
+	"github.com/cloudwego/eino-ext/components/model/ark"
+	"github.com/cloudwego/eino-ext/components/model/ollama"
 	"github.com/cloudwego/eino-ext/components/model/openai"
+	"github.com/cloudwego/eino/components/model"
 	"github.com/cloudwego/eino/schema"
 	"github.com/joho/godotenv"
 	"io"
@@ -17,18 +20,79 @@ func main() {
 
 	}
 	ctx := context.TODO()
-	config := &openai.ChatModelConfig{
-		BaseURL: os.Getenv("BASEURL"),
-		Model:   os.Getenv("MODEL"),
-		APIKey:  os.Getenv("APIKEY"),
-	}
-	model, _ := openai.NewChatModel(ctx, config) // create an invokable LLM instance
-	streamResult, _ := model.Stream(ctx, []*schema.Message{
+	// model := initChatModel(ctx, "openai")
+	model := initToolChatModel(ctx, "openai")
+
+	/*
+		streamResult, _ := model.Stream(ctx, []*schema.Message{
+			schema.SystemMessage("you are a helpful assistant."),
+			schema.UserMessage("what does the future AI App look like?"),
+		})
+		reportStream(streamResult)
+	*/
+	generateResult, _ := model.Generate(ctx, []*schema.Message{
 		schema.SystemMessage("you are a helpful assistant."),
 		schema.UserMessage("what does the future AI App look like?"),
 	})
-	reportStream(streamResult)
+	fmt.Printf("%s", generateResult.Content)
+}
 
+func initChatModel(ctx context.Context, modelType string) model.ChatModel {
+	var chatModel model.ChatModel
+	switch modelType {
+	case "ollama":
+		config := &ollama.ChatModelConfig{
+			BaseURL: os.Getenv("OLLAMA_BASE_URL"),
+			Model:   os.Getenv("OLLAMA_MODEL"),
+		}
+		chatModel, _ = ollama.NewChatModel(ctx, config)
+	case "openai":
+		config := &openai.ChatModelConfig{
+			BaseURL: os.Getenv("OPENAI_BASE_URL"),
+			APIKey:  os.Getenv("OPENAI_API_KEY"),
+			Model:   os.Getenv("OPENAI_MODEL_NAME"),
+		}
+		chatModel, _ = openai.NewChatModel(ctx, config)
+	case "ark":
+		fallthrough
+	default:
+		config := &ark.ChatModelConfig{
+			BaseURL: os.Getenv("ARK_BASE_URL"),
+			APIKey:  os.Getenv("ARK_API_KEY"),
+			Model:   os.Getenv("ARK_MODEL_NAME"),
+		}
+		chatModel, _ = ark.NewChatModel(ctx, config)
+	}
+	return chatModel
+}
+
+func initToolChatModel(ctx context.Context, modelType string) model.ToolCallingChatModel {
+	var toolcallChatModel model.ToolCallingChatModel
+	switch modelType {
+	case "ollama":
+		config := &ollama.ChatModelConfig{
+			BaseURL: os.Getenv("OLLAMA_BASE_URL"),
+			Model:   os.Getenv("OLLAMA_MODEL"),
+		}
+		toolcallChatModel, _ = ollama.NewChatModel(ctx, config)
+	case "openai":
+		config := &openai.ChatModelConfig{
+			BaseURL: os.Getenv("OPENAI_BASE_URL"),
+			APIKey:  os.Getenv("OPENAI_API_KEY"),
+			Model:   os.Getenv("OPENAI_MODEL_NAME"),
+		}
+		toolcallChatModel, _ = openai.NewChatModel(ctx, config)
+	case "ark":
+		fallthrough
+	default:
+		config := &ark.ChatModelConfig{
+			BaseURL: os.Getenv("ARK_BASE_URL"),
+			APIKey:  os.Getenv("ARK_API_KEY"),
+			Model:   os.Getenv("ARK_MODEL_NAME"),
+		}
+		toolcallChatModel, _ = ark.NewChatModel(ctx, config)
+	}
+	return toolcallChatModel
 }
 
 func reportStream(sr *schema.StreamReader[*schema.Message]) {

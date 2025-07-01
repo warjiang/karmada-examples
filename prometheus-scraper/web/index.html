@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prometheus Metrics</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.3.2/dist/echarts.min.js"></script>
+</head>
+<body>
+    <form id="scrape-form">
+        <label for="namespace">Namespace:</label>
+        <input type="text" id="namespace" name="namespace" value="karmada-system">
+        <label for="pod">Pod:</label>
+        <input type="text" id="pod" name="pod" value="karmada-scheduler-7bd4659f9f-8lfb5">
+        <label for="port">Port:</label>
+        <input type="text" id="port" name="port" value="10351">
+        <button type="submit">Scrape Pod</button>
+    </form>
+    <br>
+
+    <form id="query-form">
+        <label for="metric-name">Metric Name:</label>
+        <select id="metric-name"></select>
+        <label for="labels">Labels (key=value,key2=value2):</label>
+        <input type="text" id="labels" name="labels" placeholder="e.g., verb=GET,code=200">
+        <button type="submit">Query Metrics</button>
+    </form>
+    <br>
+
+    <div id="main" style="width: 100%;height:600px;"></div>
+    <script type="text/javascript">
+        var myChart = echarts.init(document.getElementById('main'));
+
+        // Specify the configuration items and data for the chart
+        var option = {
+            title: {
+                text: 'Metrics'
+            },
+            tooltip: {},
+            legend: {
+                data:[]
+            },
+            xAxis: {
+                data: []
+            },
+            yAxis: {},
+            series: []
+        };
+
+        // Display the chart
+        myChart.setOption(option);
+
+        document.getElementById('scrape-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const namespace = document.getElementById('namespace').value;
+            const pod = document.getElementById('pod').value;
+            const port = document.getElementById('port').value;
+            fetch('/scrape/pod', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    namespace: namespace,
+                    name: pod,
+                    port: port
+                })
+            }).then(() => {
+                // After scraping, refresh metric names and fetch a default metric
+                fetchMetricNames();
+                fetchMetrics('apiserver_request_total');
+            });
+        });
+
+        document.getElementById('query-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const metricName = document.getElementById('metric-name').value;
+            const labelsInput = document.getElementById('labels').value;
+            const labels = {};
+            labelsInput.split(',').forEach(pair => {
+                const [key, value] = pair.split('=');
+                if (key && value) {
+                    labels[key.trim()] = value.trim();
+                }
+            });
+            fetchMetrics(metricName, labels);
+        });
+
+        function fetchMetricNames() {
+            fetch('/metrics/names')
+                .then(response => response.json())
+                .then(data => {
+                    const select = document.getElementById('metric-name');
+                    select.innerHTML = ''; // Clear existing options
+                    data.forEach(name => {
+                        const option = document.createElement('option');
+                        option.value = name;
+                        option.textContent = name;
+                        select.appendChild(option);
+                    });
+                });
+        }
+
+        function fetchMetrics(name, labels = {}) {
+            let url = '/metrics/' + name;
+            const params = new URLSearchParams();
+            for (const key in labels) {
+                params.append(key, labels[key]);
+            }
+            if (params.toString()) {
+                url += '?' + params.toString();
+            }
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    // group metrics by labels
+                    const groupedMetrics = data.reduce((acc, metric) => {
+                        const key = JSON.stringify(metric.Labels);
+                        if (!acc[key]) {
+                            acc[key] = [];
+                        }
+                        acc[key].push(metric);
+                        return acc;
+                    }, {});
+
+                    const series = [];
+                    const legendData = [];
+                    for (const key in groupedMetrics) {
+                        const metrics = groupedMetrics[key];
+                        const legend = metrics[0].Labels.map(l => `${l.Name}=${l.Value}`).join(',');
+                        legendData.push(legend);
+                        series.push({
+                            name: legend,
+                            type: 'line',
+                            data: metrics.map(m => [m.Timestamp, m.Value])
+                        });
+                    }
+
+                    myChart.setOption({
+                        legend: {
+                            data: legendData
+                        },
+                        xAxis: {
+                            type: 'time'
+                        },
+                        yAxis: {
+                            type: 'value'
+                        },
+                        series: series
+                    });
+                });
+        }
+
+        // Initial fetch of metric names when the page loads
+        fetchMetricNames();
+    </script>
+</body>
+</html>
