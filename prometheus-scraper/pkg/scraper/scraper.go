@@ -6,6 +6,8 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"strings"
+	"time"
 
 	dto "github.com/prometheus/client_model/go"
 	"github.com/prometheus/common/expfmt"
@@ -34,7 +36,7 @@ func ScrapeFromPod(namespace, name, port string) ([]*database.Metric, error) {
 		return nil, fmt.Errorf("failed to get metrics from pod: %w", err)
 	}
 
-	return parseMetrics(bytes.NewReader(data))
+	return parseMetrics(bytes.NewReader(data), time.Now().UnixMilli(), name, name)
 }
 
 func Scrape(url string) ([]*database.Metric, error) {
@@ -48,10 +50,10 @@ func Scrape(url string) ([]*database.Metric, error) {
 		return nil, fmt.Errorf("failed to scrape metrics: status code %d", resp.StatusCode)
 	}
 
-	return parseMetrics(resp.Body)
+	return parseMetrics(resp.Body, time.Now().UnixMilli(), url, "")
 }
 
-func parseMetrics(reader io.Reader) ([]*database.Metric, error) {
+func parseMetrics(reader io.Reader, timestamp int64, instance string, pod string) ([]*database.Metric, error) {
 	var parser expfmt.TextParser
 	metricFamilies, err := parser.TextToMetricFamilies(reader)
 	if err != nil {
@@ -60,10 +62,18 @@ func parseMetrics(reader io.Reader) ([]*database.Metric, error) {
 
 	var metrics []*database.Metric
 	for _, mf := range metricFamilies {
+		// Ignore Go-related metrics
+		if strings.HasPrefix(mf.GetName(), "go_") {
+			continue
+		}
 		for _, m := range mf.GetMetric() {
 			metric := &database.Metric{
-				Name: mf.GetName(),
+				Name:      mf.GetName(),
+				Timestamp: timestamp,
+				Pod:       pod,
+				Type:      mf.GetType().String(),
 			}
+			metric.Labels = append(metric.Labels, database.Label{Name: "instance", Value: instance})
 			for _, lp := range m.GetLabel() {
 				metric.Labels = append(metric.Labels, database.Label{
 					Name:  lp.GetName(),

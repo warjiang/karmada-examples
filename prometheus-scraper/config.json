@@ -1,0 +1,10 @@
+{
+  "intervalSeconds": 10,
+  "targets": [
+    {
+      "namespace": "karmada-system",
+      "name": "karmada-scheduler-7bd4659f9f-8lfb5",
+      "port": "10351"
+    }
+  ]
+}
