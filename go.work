@@ -8,6 +8,8 @@ use (
 	./karmada-apiserver
 	./karmada-proxy
 	./karmada-search
+	./llm-examples
 	./log-viewer
+	./mcp-integration
 	./prometheus-scraper
 )

@@ -20,11 +20,12 @@ func getMetrics(db *database.DB) gin.HandlerFunc {
 		name := c.Param("name")
 		labels := make(map[string]string)
 		for k, v := range c.Request.URL.Query() {
-			if k != "name" {
+			if k != "name" && k != "pod" {
 				labels[k] = v[0]
 			}
 		}
-		metrics, err := db.GetMetrics(name, labels)
+		pod := c.Query("pod")
+		metrics, err := db.GetMetrics(name, labels, pod)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 			return

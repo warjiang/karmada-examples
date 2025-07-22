@@ -18,6 +18,8 @@ type DB struct {
 type Metric struct {
 	ID        int64
 	Name      string
+	Type      string
+	Pod       string
 	Labels    []Label
 	Value     float64
 	Timestamp int64
@@ -60,8 +62,10 @@ func (db *DB) InsertMetric(metric *Metric) error {
 	}
 
 	_, err = db.Exec(
-		"INSERT INTO metrics (name, labels, value, timestamp) VALUES (?, ?, ?, ?)",
+		"INSERT INTO metrics (name, type, pod, labels, value, timestamp) VALUES (?, ?, ?, ?, ?, ?)",
 		metric.Name,
+		metric.Type,
+		metric.Pod,
 		string(labelsJSON),
 		metric.Value,
 		metric.Timestamp,
@@ -69,9 +73,14 @@ func (db *DB) InsertMetric(metric *Metric) error {
 	return err
 }
 
-func (db *DB) GetMetrics(name string, labels map[string]string) ([]*Metric, error) {
-	query := "SELECT id, name, labels, value, timestamp FROM metrics WHERE name = ?"
+func (db *DB) GetMetrics(name string, labels map[string]string, pod string) ([]*Metric, error) {
+	query := "SELECT id, name, type, pod, labels, value, timestamp FROM metrics WHERE name = ?"
 	args := []interface{}{name}
+
+	if pod != "" {
+		query += " AND pod = ?"
+		args = append(args, pod)
+	}
 
 	rows, err := db.Query(query, args...)
 	if err != nil {
@@ -83,7 +92,7 @@ func (db *DB) GetMetrics(name string, labels map[string]string) ([]*Metric, erro
 	for rows.Next() {
 		metric := &Metric{}
 		var labelsJSON string
-		if err := rows.Scan(&metric.ID, &metric.Name, &labelsJSON, &metric.Value, &metric.Timestamp); err != nil {
+		if err := rows.Scan(&metric.ID, &metric.Name, &metric.Type, &metric.Pod, &labelsJSON, &metric.Value, &metric.Timestamp); err != nil {
 			return nil, fmt.Errorf("failed to scan metric: %w", err)
 		}
 		if err := json.Unmarshal([]byte(labelsJSON), &metric.Labels); err != nil {

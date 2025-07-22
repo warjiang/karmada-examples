@@ -39,7 +39,7 @@
                 data:[]
             },
             xAxis: {
-                data: []
+                type: 'time'
             },
             yAxis: {},
             series: []
@@ -112,6 +112,14 @@
             fetch(url)
                 .then(response => response.json())
                 .then(data => {
+                    if (!Array.isArray(data)) {
+                        // Clear the chart and return if data is not valid
+                        myChart.setOption({
+                            legend: { data: [] },
+                            series: []
+                        });
+                        return;
+                    }
                     // group metrics by labels
                     const groupedMetrics = data.reduce((acc, metric) => {
                         const key = JSON.stringify(metric.Labels);
@@ -125,13 +133,41 @@
                     const series = [];
                     const legendData = [];
                     for (const key in groupedMetrics) {
-                        const metrics = groupedMetrics[key];
-                        const legend = metrics[0].Labels.map(l => `${l.Name}=${l.Value}`).join(',');
+                        let metrics = groupedMetrics[key];
+
+                        // Sort by timestamp and take the last 100 points
+                        metrics.sort((a, b) => a.Timestamp - b.Timestamp);
+                        if (metrics.length > 100) {
+                            metrics = metrics.slice(metrics.length - 100);
+                        }
+
+                        const legend = (metrics[0].Labels || []).map(l => `${l.Name}=${l.Value}`).join(',');
                         legendData.push(legend);
+
+                        let processedData = [];
+                        const metricType = metrics[0].Type; // Get the metric type
+
+                        if (metricType === 'COUNTER') {
+                            // Calculate rate for COUNTER
+                            for (let i = 1; i < metrics.length; i++) {
+                                const prev = metrics[i - 1];
+                                const curr = metrics[i];
+                                const timeDiff = (curr.Timestamp - prev.Timestamp) / 1000; // in seconds
+                                if (timeDiff > 0) {
+                                    const rate = (curr.Value - prev.Value) / timeDiff;
+                                    processedData.push([curr.Timestamp, rate]);
+                                }
+                            }
+                        } else {
+                            // For GAUGE, HISTOGRAM, SUMMARY, just use raw values
+                            // Note: More advanced visualization for HISTOGRAM/SUMMARY (e.g., quantiles) would require more complex logic.
+                            processedData = metrics.map(m => [m.Timestamp, m.Value]);
+                        }
+
                         series.push({
                             name: legend,
                             type: 'line',
-                            data: metrics.map(m => [m.Timestamp, m.Value])
+                            data: processedData
                         });
                     }
 
@@ -140,7 +176,17 @@
                             data: legendData
                         },
                         xAxis: {
-                            type: 'time'
+                            type: 'time',
+                            axisLabel: {
+                                formatter: function (value) {
+                                    console.log('value', value)
+                                    var date = new Date(value);
+                                    var hours = date.getHours().toString().padStart(2, '0');
+                                    var minutes = date.getMinutes().toString().padStart(2, '0');
+                                    var seconds = date.getSeconds().toString().padStart(2, '0');
+                                    return hours + ':' + minutes + ':' + seconds;
+                                }
+                            }
                         },
                         yAxis: {
                             type: 'value'
