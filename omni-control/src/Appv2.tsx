@@ -3,50 +3,188 @@ import {
   ReactFlow,
   Background,
   Controls,
+  Handle,
+  Position,
   addEdge,
   useEdgesState,
   useNodesState,
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
-import type { Connection, Edge, Node, ReactFlowInstance } from '@xyflow/react';
+import type { Connection, Edge, Node, NodeProps, ReactFlowInstance } from '@xyflow/react';
 
-type PaletteItem = {
-  key: string;
-  label: string;
-  node: Pick<Node, 'type' | 'data' | 'style'>;
+type NodeCategory = 'resource' | 'policy';
+
+type NodeKind =
+  | 'ResourceTemplate'
+  | 'ResourceBinding'
+  | 'Work'
+  | 'PropagationPolicy'
+  | 'OverridePolicy';
+
+type OmniNodeData = {
+  title: string;
+  subtitle?: string;
+  category: NodeCategory;
+  kind: NodeKind;
 };
 
+type PaletteKey = 'resource-template' | 'resource-binding' | 'work' | 'propagation-policy' | 'override-policy';
+
+type ResourceFlowNode = Node<OmniNodeData, 'resource'>;
+type PolicyFlowNode = Node<OmniNodeData, 'policy'>;
+type OmniFlowNode = ResourceFlowNode | PolicyFlowNode;
+
+type PaletteItem = {
+  key: PaletteKey;
+  label: string;
+  node: Pick<OmniFlowNode, 'type' | 'data'>;
+};
+
+function getNodeTheme(kind: NodeKind) {
+  if (kind === 'Work') {
+    return {
+      bg: '#EAF7EE',
+      border: '#22C55E',
+      badgeBg: '#16A34A',
+      width: 160,
+    };
+  }
+
+  if (kind === 'PropagationPolicy' || kind === 'OverridePolicy') {
+    return {
+      bg: '#FFF7ED',
+      border: '#F97316',
+      badgeBg: '#EA580C',
+      width: 190,
+    };
+  }
+
+  if (kind === 'ResourceTemplate') {
+    return {
+      bg: '#E8F2FF',
+      border: '#3B82F6',
+      badgeBg: '#2563EB',
+      width: 320,
+    };
+  }
+
+  return {
+    bg: '#E8F2FF',
+    border: '#3B82F6',
+    badgeBg: '#2563EB',
+    width: 220,
+  };
+}
+
+function ResourceNode({ data, selected }: NodeProps<ResourceFlowNode>) {
+  const theme = getNodeTheme(data.kind);
+
+  return (
+    <div
+      style={{
+        width: theme.width,
+        padding: 12,
+        borderRadius: 12,
+        background: theme.bg,
+        border: `2px solid ${selected ? theme.badgeBg : theme.border}`,
+        color: '#0f172a',
+        boxShadow: selected ? '0 0 0 3px rgba(37, 99, 235, 0.2)' : 'none',
+      }}
+    >
+      <Handle type="target" position={Position.Top} style={{ background: theme.border }} />
+      <Handle type="source" position={Position.Bottom} style={{ background: theme.border }} />
+
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 10 }}>
+        <div style={{ fontSize: 14, fontWeight: 650, whiteSpace: 'pre-line' }}>{data.title}</div>
+        <div
+          style={{
+            fontSize: 11,
+            fontWeight: 650,
+            padding: '2px 8px',
+            borderRadius: 999,
+            background: theme.badgeBg,
+            color: '#fff',
+            flexShrink: 0,
+          }}
+        >
+          Resource
+        </div>
+      </div>
+
+      {data.subtitle ? (
+        <div style={{ marginTop: 6, fontSize: 12, opacity: 0.85, whiteSpace: 'pre-line' }}>{data.subtitle}</div>
+      ) : null}
+    </div>
+  );
+}
+
+function PolicyNode({ data, selected }: NodeProps<PolicyFlowNode>) {
+  const theme = getNodeTheme(data.kind);
+
+  return (
+    <div
+      style={{
+        width: theme.width,
+        padding: 12,
+        borderRadius: 12,
+        background: theme.bg,
+        border: `2px solid ${selected ? theme.badgeBg : theme.border}`,
+        color: '#0f172a',
+        boxShadow: selected ? '0 0 0 3px rgba(234, 88, 12, 0.2)' : 'none',
+      }}
+    >
+      <Handle type="target" position={Position.Left} style={{ background: theme.border }} />
+      <Handle type="source" position={Position.Right} style={{ background: theme.border }} />
+
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 10 }}>
+        <div style={{ fontSize: 14, fontWeight: 650, whiteSpace: 'pre-line' }}>{data.title}</div>
+        <div
+          style={{
+            fontSize: 11,
+            fontWeight: 650,
+            padding: '2px 8px',
+            borderRadius: 999,
+            background: theme.badgeBg,
+            color: '#fff',
+            flexShrink: 0,
+          }}
+        >
+          Policy
+        </div>
+      </div>
+
+      {data.subtitle ? (
+        <div style={{ marginTop: 6, fontSize: 12, opacity: 0.85, whiteSpace: 'pre-line' }}>{data.subtitle}</div>
+      ) : null}
+    </div>
+  );
+}
+
 export default function App() {
-  const initialNodes: Node[] = [
+  const nodeTypes = useMemo(() => ({ resource: ResourceNode, policy: PolicyNode }), []);
+
+  const initialNodes: OmniFlowNode[] = [
     {
       id: 'resource-template',
-      type: 'default',
+      type: 'resource',
       data: {
-        label:
-          'Resource Template\n(Deployment / Service / ConfigMap / Secret ... )\nExactly same with K8s APIs',
+        title: 'Resource Template',
+        subtitle:
+          '(Deployment / Service / ConfigMap / Secret ... )\nExactly same with K8s APIs',
+        category: 'resource',
+        kind: 'ResourceTemplate',
       },
       position: { x: 200, y: 50 },
-      style: {
-        background: '#cce5ff',
-        borderRadius: '8px',
-        padding: '10px',
-        width: '300px',
-        textAlign: 'center',
-      },
     },
     {
       id: 'resource-binding',
-      type: 'default',
-      data: { label: 'Resource Binding' },
-      position: { x: 250, y: 200 },
-      style: {
-        background: '#cce5ff',
-        borderRadius: '8px',
-        padding: '10px',
-        width: '200px',
-        textAlign: 'center',
-        zIndex: 10,
+      type: 'resource',
+      data: {
+        title: 'Resource Binding',
+        category: 'resource',
+        kind: 'ResourceBinding',
       },
+      position: { x: 250, y: 200 },
     },
   ];
 
@@ -72,17 +210,13 @@ export default function App() {
         key: 'resource-template',
         label: 'Resource Template',
         node: {
-          type: 'default',
+          type: 'resource',
           data: {
-            label:
-              'Resource Template\n(Deployment / Service / ConfigMap / Secret ... )\nExactly same with K8s APIs',
-          },
-          style: {
-            background: '#cce5ff',
-            borderRadius: '8px',
-            padding: '10px',
-            width: '300px',
-            textAlign: 'center',
+            title: 'Resource Template',
+            subtitle:
+              '(Deployment / Service / ConfigMap / Secret ... )\nExactly same with K8s APIs',
+            category: 'resource',
+            kind: 'ResourceTemplate',
           },
         },
       },
@@ -90,15 +224,23 @@ export default function App() {
         key: 'resource-binding',
         label: 'Resource Binding',
         node: {
-          type: 'default',
-          data: { label: 'Resource Binding' },
-          style: {
-            background: '#cce5ff',
-            borderRadius: '8px',
-            padding: '10px',
-            width: '200px',
-            textAlign: 'center',
-            zIndex: 10,
+          type: 'resource',
+          data: {
+            title: 'Resource Binding',
+            category: 'resource',
+            kind: 'ResourceBinding',
+          },
+        },
+      },
+      {
+        key: 'work',
+        label: 'Work',
+        node: {
+          type: 'resource',
+          data: {
+            title: 'Work',
+            category: 'resource',
+            kind: 'Work',
           },
         },
       },
@@ -106,14 +248,11 @@ export default function App() {
         key: 'propagation-policy',
         label: 'Propagation Policy',
         node: {
-          type: 'default',
-          data: { label: 'Propagation Policy' },
-          style: {
-            background: '#cce5ff',
-            borderRadius: '8px',
-            padding: '10px',
-            width: '180px',
-            textAlign: 'center',
+          type: 'policy',
+          data: {
+            title: 'Propagation Policy',
+            category: 'policy',
+            kind: 'PropagationPolicy',
           },
         },
       },
@@ -121,14 +260,11 @@ export default function App() {
         key: 'override-policy',
         label: 'Override Policy',
         node: {
-          type: 'default',
-          data: { label: 'Override Policy' },
-          style: {
-            background: '#cce5ff',
-            borderRadius: '8px',
-            padding: '10px',
-            width: '180px',
-            textAlign: 'center',
+          type: 'policy',
+          data: {
+            title: 'Override Policy',
+            category: 'policy',
+            kind: 'OverridePolicy',
           },
         },
       },
@@ -143,10 +279,10 @@ export default function App() {
     return `dnd-${id}`;
   }, []);
 
-  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+  const [nodes, setNodes, onNodesChange] = useNodesState<OmniFlowNode>(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
-  const [reactFlowInstance, setReactFlowInstance] = useState<ReactFlowInstance | null>(null);
+  const [reactFlowInstance, setReactFlowInstance] = useState<ReactFlowInstance<OmniFlowNode, Edge> | null>(null);
 
   const onConnect = useCallback(
     (connection: Connection) => {
@@ -177,7 +313,7 @@ export default function App() {
         y: event.clientY,
       });
 
-      const newNode: Node = {
+      const newNode: OmniFlowNode = {
         id: nextId(),
         position,
         ...preset.node,
@@ -223,9 +359,10 @@ export default function App() {
       </div>
 
       <div style={{ flex: 1 }}>
-        <ReactFlow
+        <ReactFlow<OmniFlowNode, Edge>
           nodes={nodes}
           edges={edges}
+          nodeTypes={nodeTypes}
           onNodesChange={onNodesChange}
           onEdgesChange={onEdgesChange}
           onConnect={onConnect}
