@@ -16,7 +16,7 @@ import '@xyflow/react/dist/style.css';
 import { useState, useCallback } from 'react';
 import type { Edge, Node, OnConnect } from '@xyflow/react';
 import {
-  ResourceTemplateNode, ResourceBindingNode, WorkNode,
+  ResourceTemplateNode, ResourceBindingNode, WorkNode, PlaneGroupNode,
   PropagationPolicyEdge, OverridePolicyEdge,
 } from './components/omni';
 import Dagre from '@dagrejs/dagre';
@@ -25,32 +25,51 @@ import Dagre from '@dagrejs/dagre';
 // NodeType extends Node = Node, EdgeType extends Edge = Edge
 
 const initialNodes: OmniNode[] = [
+  // {
+  //   id: 'A',
+  //   type: 'planeGroupNode',
+  //   position: { x: 0, y: 0 },
+  //   style: {
+  //     width:800,
+  //     height: 460,
+  //   },
+  //   data: {
+  //     label: 'control-plane'
+  //   },
+  // },
+
   {
     id: 'node1',
-    position: { x: 0, y: 0 },
+    position: { x: 80, y: 40 },
     data: {
       name: 'nginx-deployment',
       namespace: 'example',
     },
     type: 'resourceTemplateNode',
+    // parentId: 'A',
+    // extent: 'parent',
   },
   {
     id: 'node2',
-    position: { x: 0, y: 200 },
+    position: { x: 60, y: 200 },
     data: {
       name: 'nginx-deployment-deployment',
       namespace: 'example',
     },
     type: 'resourceBindingNode',
+    // parentId: 'A',
+    // extent: 'parent',
   },
   {
     id: 'node3',
-    position: { x: 0, y: 400 },
+    position: { x: 40, y: 400 },
     data: {
       name: 'nginx-deployment-697bcd7948',
       namespace: 'karmada-es-member1',
     },
     type: 'workNode',
+    // parentId: 'A',
+    // extent: 'parent',
   },
   {
     id: 'node4',
@@ -60,6 +79,8 @@ const initialNodes: OmniNode[] = [
       namespace: 'karmada-es-member2',
     },
     type: 'workNode',
+    // parentId: 'A',
+    // extent: 'parent',
   },
 ];
 const initialEdges: OmniEdge[] = [
@@ -116,6 +137,7 @@ const nodeTypes = {
   resourceTemplateNode: ResourceTemplateNode,
   resourceBindingNode: ResourceBindingNode,
   workNode: WorkNode,
+  planeGroupNode: PlaneGroupNode,
 };
 const edgeTypes = {
   propagationPolicy: PropagationPolicyEdge,
