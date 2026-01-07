@@ -86,7 +86,7 @@ const initialNodes: OmniNode[] = [
 
   {
     id: 'node5',
-    position: { x: 400, y: 500 },
+    position: { x: 100, y: 550 },
     data: {
       name: 'aa',
       namespace: 'example',
@@ -96,7 +96,7 @@ const initialNodes: OmniNode[] = [
   },
   {
     id: 'node6',
-    position: { x: 500, y: 500 },
+    position: { x: 300, y: 600 },
     data: {
       name: 'bb',
       namespace: 'example',
@@ -106,7 +106,7 @@ const initialNodes: OmniNode[] = [
   },
   {
     id: 'node7',
-    position: { x: 600, y: 500 },
+    position: { x: 400, y: 500 },
     data: {
       name: 'cc',
       namespace: 'example',
@@ -116,7 +116,7 @@ const initialNodes: OmniNode[] = [
   },
   {
     id: 'node8',
-    position: { x: 800, y: 500 },
+    position: { x: 400, y: 700 },
     data: {
       name: 'dd',
       namespace: 'example',
@@ -126,7 +126,7 @@ const initialNodes: OmniNode[] = [
   },
   {
     id: 'node9',
-    position: { x: 1000, y: 500 },
+    position: { x: 800, y: 500 },
     data: {
       name: 'ee',
       namespace: 'example',
@@ -167,6 +167,57 @@ const initialEdges: OmniEdge[] = [
       label: 'op2-deployment',
     },
   },
+
+  {
+    id: 'node3-node5',
+    source: 'node3',
+    target: 'node5',
+    type: 'propagationPolicy',
+    data: {
+      // label: 'pp-workload-statefulset',
+      style: 'bezier',
+    },
+  },
+  {
+    id: 'node3-node6',
+    source: 'node3',
+    target: 'node6',
+    type: 'propagationPolicy',
+    data: {
+      // label: 'pp-workload-statefulset',
+      style: 'bezier',
+    },
+  },
+  {
+    id: 'node3-node7',
+    source: 'node3',
+    target: 'node7',
+    type: 'propagationPolicy',
+    data: {
+      // label: 'pp-workload-statefulset',
+      style: 'bezier',
+    },
+  },
+  {
+    id: 'node4-node8',
+    source: 'node4',
+    target: 'node8',
+    type: 'propagationPolicy',
+    data: {
+      // label: 'pp-workload-statefulset',
+      style: 'bezier',
+    },
+  },
+  {
+    id: 'node4-node9',
+    source: 'node4',
+    target: 'node9',
+    type: 'propagationPolicy',
+    data: {
+      // label: 'pp-workload-statefulset',
+      style: 'bezier',
+    },
+  }
 ];
 
 type OmniNodeData = {

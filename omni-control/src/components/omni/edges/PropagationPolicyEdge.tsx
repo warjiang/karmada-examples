@@ -36,7 +36,9 @@ export function PropagationPolicyEdge(props: EdgeProps<PropagationPolicyEdgeType
             style={{ stroke, strokeWidth, fill: 'none', strokeDasharray: dash ? '6 6' : undefined }}
             markerEnd={`url(#${id}-arrow)`}
         />
-        <EdgeLabelRenderer>
+        {
+            label ?
+                <EdgeLabelRenderer>
             <div
                 className="absolute pointer-events-auto"
                 style={{
@@ -48,6 +50,8 @@ export function PropagationPolicyEdge(props: EdgeProps<PropagationPolicyEdgeType
                     <span className="px-2 py-0.5 rounded-full bg-blue-50 text-blue-600 ring-1 ring-blue-200 dark:bg-blue-950/40 dark:text-blue-300">propagation policy</span>
                 </div>
             </div>
-        </EdgeLabelRenderer>
+        </EdgeLabelRenderer>:null
+        }
+        
     </>
 }

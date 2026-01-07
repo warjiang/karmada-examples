@@ -24,6 +24,7 @@ export const WorkNode: FC<WorkNodeProps> = (props: WorkNodeProps) => {
         <span className="px-2 py-0.5 rounded-full text-xs bg-emerald-50 text-emerald-600 ring-1 ring-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-300">work</span>
       </div>
       <Handle type="target" position={Position.Top} className="w-3 h-3 rounded-full border-2 border-white bg-emerald-500 shadow ring-2 ring-white/50" />
+      <Handle type="source" position={Position.Bottom} className="w-3 h-3 rounded-full border-2 border-white bg-emerald-500 shadow ring-2 ring-white/50" />
     </div>
   );
 }
