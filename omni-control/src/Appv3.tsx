@@ -13,13 +13,14 @@ import {
   useReactFlow,
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import type { Edge, Node, OnConnect } from '@xyflow/react';
 import {
   ResourceTemplateNode, ResourceBindingNode, WorkNode, PlaneGroupNode,
   PropagationPolicyEdge, OverridePolicyEdge,
 } from './components/omni';
 import Dagre from '@dagrejs/dagre';
+import { ConfigNode, ServiceNode, WorkloadNode } from './components/kubernetes';
 
 
 // NodeType extends Node = Node, EdgeType extends Edge = Edge
@@ -82,6 +83,58 @@ const initialNodes: OmniNode[] = [
     // parentId: 'A',
     // extent: 'parent',
   },
+
+  {
+    id: 'node5',
+    position: { x: 400, y: 500 },
+    data: {
+      name: 'aa',
+      namespace: 'example',
+      workloadType: 'deployment',
+    },
+    type: 'workloadNode',
+  },
+  {
+    id: 'node6',
+    position: { x: 500, y: 500 },
+    data: {
+      name: 'bb',
+      namespace: 'example',
+      workloadType: 'statefulset',
+    },
+    type: 'workloadNode',
+  },
+  {
+    id: 'node7',
+    position: { x: 600, y: 500 },
+    data: {
+      name: 'cc',
+      namespace: 'example',
+      workloadType: 'daemonset',
+    },
+    type: 'workloadNode',
+  },
+  {
+    id: 'node8',
+    position: { x: 800, y: 500 },
+    data: {
+      name: 'dd',
+      namespace: 'example',
+      workloadType: 'cronjob',
+    },
+    type: 'workloadNode',
+  },
+  {
+    id: 'node9',
+    position: { x: 1000, y: 500 },
+    data: {
+      name: 'ee',
+      namespace: 'example',
+      workloadType: 'job',
+    },
+    type: 'workloadNode',
+  },
+
 ];
 const initialEdges: OmniEdge[] = [
   {
@@ -138,6 +191,9 @@ const nodeTypes = {
   resourceBindingNode: ResourceBindingNode,
   workNode: WorkNode,
   planeGroupNode: PlaneGroupNode,
+  workloadNode: WorkloadNode,
+  configNode: ConfigNode,
+  serviceNode: ServiceNode,
 };
 const edgeTypes = {
   propagationPolicy: PropagationPolicyEdge,
@@ -194,7 +250,7 @@ export function LayoutFlow() {
     (params) => setEdges((edgesSnapshot) => addEdge(params, edgesSnapshot)),
     [],
   );
-  
+
   const onLayout = useCallback((direction: 'TB' | 'LR') => {
     console.log(nodes);
     const layouted = getLayoutedElements(nodes, edges, { direction });
@@ -204,28 +260,34 @@ export function LayoutFlow() {
 
     fitView();
   }, [nodes, edges]);
+
+
+  useEffect(() => {
+    // onLayout('LR')
+  }, [])
+
   return (
     <div className="w-screen h-screen flex">
       <div className="flex-1">
-        
-          <ReactFlow<OmniNode, OmniEdge>
-            nodes={nodes}
-            edges={edges}
-            onNodesChange={onNodesChange}
-            onEdgesChange={onEdgesChange}
-            onConnect={onConnect}
-            fitView
-            nodeTypes={nodeTypes}
-            edgeTypes={edgeTypes}
-          >
-            <Background />
-            <Controls />
-            <MiniMap nodeColor={nodeColor} nodeStrokeWidth={3} zoomable pannable />
-            <Panel position="top-right">
-              <button onClick={() => onLayout('TB')}>vertical layout</button>
-              <button onClick={() => onLayout('LR')}>horizontal layout</button>
-            </Panel>
-          </ReactFlow>
+
+        <ReactFlow<OmniNode, OmniEdge>
+          nodes={nodes}
+          edges={edges}
+          onNodesChange={onNodesChange}
+          onEdgesChange={onEdgesChange}
+          onConnect={onConnect}
+          fitView
+          nodeTypes={nodeTypes}
+          edgeTypes={edgeTypes}
+        >
+          <Background />
+          <Controls />
+          <MiniMap nodeColor={nodeColor} nodeStrokeWidth={3} zoomable pannable />
+          <Panel position="top-right">
+            <button onClick={() => onLayout('TB')}>vertical layout</button>
+            <button onClick={() => onLayout('LR')}>horizontal layout</button>
+          </Panel>
+        </ReactFlow>
       </div>
     </div>
   );
