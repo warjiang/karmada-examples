@@ -47,7 +47,7 @@ export function OverridePolicyEdge(props: EdgeProps<OverridePolicyEdgeType>) {
           >
             <div className="flex items-center gap-2 px-2 py-1 rounded-md bg-white/90 dark:bg-slate-900 ring-1 ring-slate-200 shadow-sm text-xs">
               <span className="text-slate-900 dark:text-slate-100 font-medium">{label}</span>
-              <span className="px-2 py-0.5 rounded-full bg-orange-50 text-orange-600 ring-1 ring-orange-200 dark:bg-orange-950/40 dark:text-orange-300">override</span>
+              <span className="px-2 py-0.5 rounded-full bg-orange-50 text-orange-600 ring-1 ring-orange-200 dark:bg-orange-950/40 dark:text-orange-300">override policy</span>
             </div>
           </div>
         </EdgeLabelRenderer> :
