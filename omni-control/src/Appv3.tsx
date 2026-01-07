@@ -57,12 +57,17 @@ const initialEdges: OmniEdge[] = [
     type: 'propagationPolicy',
     data: {
       label: 'pp-workload-deployment',
+      style: 'bezier',
     },
   },
   {
     id: 'node2-node3',
     source: 'node2',
     target: 'node3',
+    type: 'overridePolicy',
+    data: {
+      style: 'bezier',
+    },
   },
 ];
 
@@ -112,8 +117,8 @@ export default function App() {
     [],
   );
   return (
-    <div style={{ width: '100vw', height: '100vh', display: 'flex' }}>
-      <div style={{ flex: 1 }}>
+    <div className="w-screen h-screen flex">
+      <div className="flex-1">
         <ReactFlow<OmniNode, OmniEdge>
           nodes={nodes}
           edges={edges}
