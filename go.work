@@ -8,6 +8,7 @@ use (
 	./karmada-apiserver
 	./karmada-proxy
 	./karmada-search
+	./litellm
 	./llm-examples
 	./log-viewer
 	./mcp-integration
