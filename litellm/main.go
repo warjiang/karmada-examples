@@ -55,7 +55,7 @@ type action struct {
 }
 
 type skipStats struct {
-	nonRunning, uncallable, shadowedCustom, duplicate int
+	nonRunning, uncallable, shadowedBuiltIn, duplicate int
 }
 
 type managedEndpoint struct {
@@ -110,10 +110,10 @@ func main() {
 	}
 	if skipped.total() > 0 {
 		fmt.Printf(
-			"skipped ARK endpoints: non-running=%d, uncallable=%d, shadowed-custom=%d, duplicate=%d\n",
+			"skipped ARK endpoints: non-running=%d, uncallable=%d, shadowed-built-in=%d, duplicate=%d\n",
 			skipped.nonRunning,
 			skipped.uncallable,
-			skipped.shadowedCustom,
+			skipped.shadowedBuiltIn,
 			skipped.duplicate,
 		)
 	}
@@ -217,7 +217,7 @@ func listARKDeployments(ctx context.Context, cfg config) ([]deployment, skipStat
 			break
 		}
 	}
-	deployments, skipped.shadowedCustom, skipped.duplicate = normalizeDeployments(deployments)
+	deployments, skipped.shadowedBuiltIn, skipped.duplicate = normalizeDeployments(deployments)
 	sort.Slice(deployments, func(i, j int) bool {
 		return managedID(deployments[i]) < managedID(deployments[j])
 	})
@@ -291,7 +291,7 @@ func managedFoundationModelName(endpoint *managedEndpoint) string {
 }
 
 func (s skipStats) total() int {
-	return s.nonRunning + s.uncallable + s.shadowedCustom + s.duplicate
+	return s.nonRunning + s.uncallable + s.shadowedBuiltIn + s.duplicate
 }
 
 func arkModelType(endpoint *ark.ItemForListEndpointsOutput) string {
@@ -367,7 +367,7 @@ func arkInferenceTarget(endpoint *ark.ItemForListEndpointsOutput, modelType stri
 func desiredDeployment(modelName, endpointID, inferenceID, inferenceType, project, apiKey, modelType, endpointSource string) deployment {
 	sum := sha256.Sum256([]byte(apiKey))
 	return deployment{
-		ModelName: modelName,
+		ModelName: displayModelName(modelName),
 		LiteLLMParams: map[string]any{
 			"model":   "volcengine/" + inferenceID,
 			"api_key": apiKey,
@@ -385,27 +385,63 @@ func desiredDeployment(modelName, endpointID, inferenceID, inferenceType, projec
 	}
 }
 
+func displayModelName(modelName string) string {
+	parts := strings.Split(strings.TrimSpace(modelName), "-")
+	for i := 1; i < len(parts); i++ {
+		if parts[i-1] != "latest" || parts[i] != "version" {
+			continue
+		}
+		parts = append(parts[:i-1], parts[i+1:]...)
+		i -= 2
+	}
+	if len(parts) >= 2 && len(parts[len(parts)-1]) == 6 && isDigits(parts[len(parts)-1]) {
+		parts = parts[:len(parts)-1]
+	}
+	for i := 1; i < len(parts); i++ {
+		if !isDigits(parts[i-1]) || !isDigits(parts[i]) {
+			continue
+		}
+		parts[i-1] += "." + parts[i]
+		parts = append(parts[:i], parts[i+1:]...)
+		i--
+	}
+	return strings.Join(parts, "-")
+}
+
+func isDigits(value string) bool {
+	if value == "" {
+		return false
+	}
+	for _, char := range value {
+		if char < '0' || char > '9' {
+			return false
+		}
+	}
+	return true
+}
+
 func normalizeDeployments(deployments []deployment) ([]deployment, int, int) {
-	builtInNames := make(map[string]bool)
+	userNames := make(map[string]bool)
 	for _, model := range deployments {
-		if stringField(model.ModelInfo, "ark_endpoint_source") == endpointSourceBuiltIn {
-			builtInNames[model.ModelName] = true
+		if stringField(model.ModelInfo, "ark_endpoint_source") == endpointSourceUser {
+			userNames[model.ModelName] = true
 		}
 	}
 	filtered := deployments[:0]
-	seen := make(map[string]bool)
+	seenNames := make(map[string]bool)
+	seenIDs := make(map[string]bool)
 	shadowed, duplicate := 0, 0
 	for _, model := range deployments {
-		if stringField(model.ModelInfo, "ark_endpoint_source") != endpointSourceBuiltIn && builtInNames[model.ModelName] {
+		if userNames[model.ModelName] && stringField(model.ModelInfo, "ark_endpoint_source") == endpointSourceBuiltIn {
 			shadowed++
 			continue
 		}
-		if id := managedID(model); seen[id] {
+		if seenNames[model.ModelName] || seenIDs[managedID(model)] {
 			duplicate++
 			continue
-		} else {
-			seen[id] = true
 		}
+		seenNames[model.ModelName] = true
+		seenIDs[managedID(model)] = true
 		filtered = append(filtered, model)
 	}
 	return filtered, shadowed, duplicate
