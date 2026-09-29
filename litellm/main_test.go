@@ -98,20 +98,22 @@ func TestARKModelName(t *testing.T) {
 	}
 }
 
-func TestBuiltInWinsNameConflict(t *testing.T) {
+func TestCustomWinsNameConflictAndNamesAreUnique(t *testing.T) {
 	models := []deployment{
 		desiredDeployment("same-name", "custom-1", "custom-1", "endpoint", "default", "key", modelTypeCustom, endpointSourceUser),
 		desiredDeployment("same-name", "ep-m-1", "same-name", "model", "default", "key", modelTypeFoundation, endpointSourceBuiltIn),
 		desiredDeployment("same-name", "ep-m-2", "same-name", "model", "default", "key", modelTypeFoundation, endpointSourceBuiltIn),
+		desiredDeployment("duplicate", "ep-1", "ep-1", "endpoint", "default", "key", modelTypeFoundation, endpointSourceUser),
+		desiredDeployment("duplicate", "ep-2", "ep-2", "endpoint", "default", "key", modelTypeFoundation, endpointSourceUser),
 		desiredDeployment("custom-only", "custom-2", "custom-2", "endpoint", "default", "key", modelTypeCustom, endpointSourceUser),
 	}
 	got, shadowed, duplicate := normalizeDeployments(models)
-	if shadowed != 1 || duplicate != 1 || len(got) != 2 {
+	if shadowed != 2 || duplicate != 1 || len(got) != 3 {
 		t.Fatalf("got %d models, %d shadowed and %d duplicate", len(got), shadowed, duplicate)
 	}
 	for _, model := range got {
-		if model.ModelName == "same-name" && stringField(model.ModelInfo, "ark_endpoint_source") != endpointSourceBuiltIn {
-			t.Fatal("custom model survived a built-in name conflict")
+		if model.ModelName == "same-name" && stringField(model.ModelInfo, "ark_model_type") != modelTypeCustom {
+			t.Fatal("built-in model survived a custom name conflict")
 		}
 	}
 }
@@ -119,7 +121,7 @@ func TestBuiltInWinsNameConflict(t *testing.T) {
 func TestManagedEndpointUsesModelID(t *testing.T) {
 	endpoint := &managedEndpoint{
 		Id:      volcengine.String("ep-m-20260917111620-z6gqn"),
-		ModelId: volcengine.String("deepseek-v4-1-flash-260910"),
+		ModelId: volcengine.String("doubao-seedance-2-0-260128"),
 	}
 	modelID := strings.TrimSpace(volcengine.StringValue(endpoint.ModelId))
 	model := desiredDeployment(
@@ -132,10 +134,26 @@ func TestManagedEndpointUsesModelID(t *testing.T) {
 		modelTypeFoundation,
 		endpointSourceBuiltIn,
 	)
-	if managedID(model) != "deepseek-v4-1-flash-260910" ||
-		stringField(model.LiteLLMParams, "model") != "volcengine/deepseek-v4-1-flash-260910" ||
+	if model.ModelName != "doubao-seedance-2.0" ||
+		managedID(model) != "doubao-seedance-2-0-260128" ||
+		stringField(model.LiteLLMParams, "model") != "volcengine/doubao-seedance-2-0-260128" ||
 		stringField(model.ModelInfo, "ark_endpoint_id") != "ep-m-20260917111620-z6gqn" ||
 		stringField(model.ModelInfo, "ark_endpoint_source") != endpointSourceBuiltIn {
 		t.Fatalf("unexpected managed model: %#v", model)
+	}
+}
+
+func TestDisplayModelName(t *testing.T) {
+	if got := displayModelName("doubao-pro-240515"); got != "doubao-pro" {
+		t.Fatalf("got %q", got)
+	}
+	if got := displayModelName("doubao-seed-2-1-pro"); got != "doubao-seed-2.1-pro" {
+		t.Fatalf("got %q", got)
+	}
+	if got := displayModelName("doubao-seedance-2-0-260128-latest-version"); got != "doubao-seedance-2.0" {
+		t.Fatalf("got %q", got)
+	}
+	if got := displayModelName("deepseek-v4-1-flash-260910"); got != "deepseek-v4-1-flash" {
+		t.Fatalf("got %q", got)
 	}
 }
